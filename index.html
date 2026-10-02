@@ -3,1595 +3,961 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AEROVUE INDIA // IGI Airport New Delhi (DEL) - Live Flight Radar & Terminal Operations</title>
-  <meta name="description" content="Live flight status monitor for Indira Gandhi International Airport New Delhi (DEL), real-time FIDS departures and arrivals, DigiYatra terminal navigation, and DGCA/BCAS baggage compliance standards.">
+  <meta name="description" content="Medix Care - Next-Generation Intelligent Hospital Management & Clinical Operations Platform. Real-time ICU bed allocation, instant doctor appointments, paperless EHR, and 24x7 emergency trauma triage.">
+  <meta name="author" content="Decode Labs Intern">
+  <meta name="theme-color" content="#f8fafc" id="meta-theme-color">
+  <title>MEDIX CARE // Intelligent Hospital Management &amp; Clinical Operations</title>
+
+  <!-- Google Fonts: Outfit, Plus Jakarta Sans, JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Core Responsive Stylesheet -->
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Light Blue & White Ambient Radar Grid Background -->
-  <div class="radar-bg-grid" aria-hidden="true"></div>
-  <div class="radar-glow-orb orb-1" aria-hidden="true"></div>
-  <div class="radar-glow-orb orb-2" aria-hidden="true"></div>
 
-  <!-- Top Operational Banner / Live Flight Telemetry -->
-  <header class="top-nav-bar" id="nav-header">
-    <div class="nav-container">
-      <div class="brand-group">
-        <a href="#hero-section" class="brand-link" aria-label="AEROVUE India Flight Hub">
-          <div class="brand-logo-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.3c.4-.2.6-.6.5-1.1z"/>
-            </svg>
-          </div>
-          <div class="brand-titles">
-            <span class="brand-title">AERO<span class="brand-highlight">VUE</span> <span class="country-badge">INDIA</span></span>
-            <span class="brand-subtitle">DELHI IGI AIRPORT (DEL) // AAI & DGCA RADAR</span>
-          </div>
-        </a>
-        <div class="status-beacon-pill" title="Live Airport Authority of India Telemetry">
-          <span class="beacon-dot"></span>
-          <span class="beacon-text">DIGIYATRA & FIDS LIVE</span>
-          <span class="beacon-sep">•</span>
-          <span class="beacon-time">00:40 IST</span>
-        </div>
+  <!-- Ambient Dynamic Healthcare Glow -->
+  <div class="bg-ambient-layer" aria-hidden="true">
+    <div class="ambient-grid"></div>
+    <div class="ambient-orb orb-primary"></div>
+    <div class="ambient-orb orb-secondary"></div>
+    <div class="ambient-orb orb-tertiary"></div>
+  </div>
+
+  <!-- Top Emergency & Clinical Operations Ticker -->
+  <aside class="hospital-ticker-bar" aria-label="Hospital Live Status Telemetry">
+    <div class="ticker-content">
+      <div class="ticker-left">
+        <span class="emergency-chip">
+          <span class="badge-dot emergency"></span>
+          <span>EMERGENCY 24x7</span>
+        </span>
+        <span>Ambulance Hotline: <strong>1800-MED-CARE (Toll Free)</strong> &bull; Avg Response: <strong>4 mins</strong></span>
       </div>
-
-      <!-- Quick Nav Links -->
-      <nav class="quick-nav" aria-label="Main Navigation">
-        <a href="#flight-search" class="nav-link">
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <span>Search</span>
+      <div class="ticker-right">
+        <span>Live Emergency ICU Beds: <strong style="color: var(--med-emerald);" id="ticker-icu-count">18 Available</strong></span>
+        <a href="#booking" class="ticker-link">
+          <span>Book OPD Token</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
         </a>
-        <a href="#flight-board" class="nav-link">
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="5" rx="2"/><path d="M2 10h20"/><path d="M6 15h.01"/><path d="M10 15h.01"/></svg>
-          <span>Live Board</span>
-        </a>
-        <a href="#terminal-guide" class="nav-link">
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" x2="9" y1="3" y2="18"/><line x1="15" x2="15" y1="6" y2="21"/></svg>
-          <span>Terminal Hub</span>
-        </a>
-        <a href="#baggage-policy" class="nav-link">
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="16" height="14" x="4" y="6" rx="2"/><path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="10" x2="10" y1="18"/><line x1="14" x2="14" y1="18"/></svg>
-          <span>Baggage Policy</span>
-        </a>
-      </nav>
-
-      <!-- Airport Hub Telemetry -->
-      <div class="hub-telemetry">
-        <div class="telemetry-item">
-          <span class="telemetry-label">HUB AIRPORT</span>
-          <span class="telemetry-val hub-code">DEL / T1•T2•T3</span>
-        </div>
-        <div class="telemetry-item">
-          <span class="telemetry-label">METAR (DELHI)</span>
-          <span class="telemetry-val">28°C • RWY 29L/11R</span>
-        </div>
-        <div class="telemetry-item">
-          <span class="telemetry-label">AIRSPACE CAT</span>
-          <span class="telemetry-val">CAT III-B ILS</span>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- Live Flight Alert Marquee Ticker -->
-  <aside class="live-ticker-wrap" aria-label="Urgent Flight Updates">
-    <div class="ticker-badge">
-      <span class="live-pulse-icon"></span>
-      <span>DEL OPERATIONS ALERT</span>
-    </div>
-    <div class="ticker-content-track">
-      <div class="ticker-content">
-        <span class="ticker-item"><strong class="highlight-indigo">IndiGo 6E-205</strong> to Mumbai (BOM): Boarding now at <strong>Gate 06 (T1D)</strong> • DigiYatra Biometric Active</span>
-        <span class="ticker-sep">✦</span>
-        <span class="ticker-item"><strong class="highlight-amber">Air India AI-101</strong> to New York (JFK): Gate changed to <strong>Gate 18 (T3)</strong> • Final Call for Zone A</span>
-        <span class="ticker-sep">✦</span>
-        <span class="ticker-item"><strong class="highlight-green">Emirates EK-511</strong> from Dubai: Touchdown confirmed <strong>Runway 29L</strong> • Belt 14 (T3 Arrivals)</span>
-        <span class="ticker-sep">✦</span>
-        <span class="ticker-item"><strong class="highlight-red">SpiceJet SG-819</strong> to Dubai: Departure delayed by <strong>+25 min</strong> due to late arrival of inbound craft</span>
-        <span class="ticker-sep">✦</span>
-        <span class="ticker-item"><strong class="highlight-cyan">Airport Metro Express:</strong> Trains running every 10 min to New Delhi Railway Station (Platform B1)</span>
       </div>
     </div>
   </aside>
 
-  <main>
-    <!-- ======================================================== -->
-    <!-- SECTION 1: HERO SEARCH BANNER                           -->
-    <!-- ======================================================== -->
-    <section class="hero-section" id="hero-section">
-      <div class="hero-inner-container">
-        <!-- Hero Tagline -->
-        <div class="hero-header-text">
-          <div class="badge-pill">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-            INDIA FLIGHT RADAR & TERMINAL WAYFINDING
+  <!-- Sticky Responsive Header & Navigation Bar -->
+  <header class="navbar-header" id="main-header">
+    <div class="container">
+      <div class="nav-wrapper">
+        
+        <!-- Brand Logo -->
+        <a href="#hero" class="brand-logo" id="brand-logo-link" aria-label="Medix Care Hospital Management System">
+          <div class="brand-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+              <path d="M12 5v6"/>
+              <path d="M9 8h6"/>
+            </svg>
           </div>
-          <h1 class="hero-title">Live Flight Tracking & Delhi Airport Terminal Guide</h1>
-          <p class="hero-subtitle">
-            Real-time flight status for 1,600+ daily domestic & international departures and arrivals at Indira Gandhi International Airport (DEL), DigiYatra gate updates, and baggage compliance rules.
-          </p>
+          <div class="brand-meta">
+            <span class="brand-title">MEDIX<span class="text-gradient">CARE</span></span>
+            <span class="brand-sub">HOSPITAL OS // NABH ACCREDITED</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="nav-menu-desktop" id="desktop-nav" aria-label="Primary Navigation">
+          <a href="#hero" class="nav-link active" id="nav-link-hero">Overview</a>
+          <a href="#bed-monitor" class="nav-link" id="nav-link-beds">Live Bed Monitor</a>
+          <a href="#departments" class="nav-link" id="nav-link-depts">Departments</a>
+          <a href="#booking" class="nav-link" id="nav-link-booking">Book Appointment</a>
+          <a href="#doctors" class="nav-link" id="nav-link-doctors">Specialists</a>
+          <a href="#comparison" class="nav-link" id="nav-link-comparison">Quality Specs</a>
+          <a href="#faq" class="nav-link" id="nav-link-faq">Help &amp; FAQ</a>
+        </nav>
+
+        <!-- Right Action Controls -->
+        <div class="nav-actions">
+          <!-- Theme Toggle Switcher Button -->
+          <button class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Toggle Light / Dark mode" title="Toggle Light / Dark theme">
+            <svg class="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+            <svg class="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+          </button>
+
+          <a href="tel:18006332273" class="btn btn-emergency btn-desktop-only" id="header-btn-emergency">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span>Emergency 24x7</span>
+          </a>
+          <a href="#booking" class="btn btn-primary" id="header-btn-book">
+            <span>Book Visit</span>
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+
+          <!-- Mobile / Tablet Hamburger Toggle Button -->
+          <button class="mobile-toggle-btn" id="mobile-menu-toggle" aria-label="Toggle navigation drawer" aria-expanded="false" aria-controls="mobile-drawer-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
         </div>
 
-        <!-- Hero Route Search Component -->
-        <div class="hero-search-wrapper" id="flight-search">
-          <!-- Pure CSS Mode Tabs -->
-          <input type="radio" name="search-mode" id="mode-roundtrip" class="tab-radio" checked>
-          <input type="radio" name="search-mode" id="mode-oneway" class="tab-radio">
-          <input type="radio" name="search-mode" id="mode-flightno" class="tab-radio">
+      </div>
+    </div>
+  </header>
 
-          <div class="search-tabs-header">
-            <div class="mode-selectors">
-              <label for="mode-roundtrip" class="tab-btn">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg>
-                Round Trip
-              </label>
-              <label for="mode-oneway" class="tab-btn">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                One Way / Direct
-              </label>
-              <label for="mode-flightno" class="tab-btn">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
-                Flight Number
-              </label>
+  <!-- Mobile & Tablet Navigation Drawer -->
+  <div class="mobile-drawer" id="mobile-drawer-menu" aria-label="Mobile Navigation Drawer">
+    <ul class="mobile-nav-list">
+      <li>
+        <a href="#hero" class="mobile-nav-link active" data-drawer-close>
+          <span>Hospital Overview</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+      </li>
+      <li>
+        <a href="#bed-monitor" class="mobile-nav-link" data-drawer-close>
+          <span>Live Bed &amp; ICU Availability</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+      </li>
+      <li>
+        <a href="#departments" class="mobile-nav-link" data-drawer-close>
+          <span>Clinical Specialties</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+      </li>
+      <li>
+        <a href="#booking" class="mobile-nav-link" data-drawer-close>
+          <span>Book Doctor Appointment</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+      </li>
+      <li>
+        <a href="#doctors" class="mobile-nav-link" data-drawer-close>
+          <span>Our Specialist Doctors</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+      </li>
+      <li>
+        <a href="#comparison" class="mobile-nav-link" data-drawer-close>
+          <span>Hospital Standards Comparison</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+      </li>
+      <li>
+        <a href="#faq" class="mobile-nav-link" data-drawer-close>
+          <span>Patient Guidelines &amp; Insurance FAQ</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+      </li>
+    </ul>
+    <div class="mobile-nav-actions">
+      <a href="tel:18006332273" class="btn btn-emergency" style="width: 100%;">
+        <span>Call Ambulance Hotline: 1800-MED-CARE</span>
+      </a>
+      <a href="#booking" class="btn btn-primary" style="width: 100%;" data-drawer-close>
+        <span>Instant Clinical Appointment</span>
+      </a>
+    </div>
+  </div>
+
+  <main id="main-content">
+    
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero" aria-labelledby="hero-title-h1">
+      <div class="container">
+        
+        <div class="hero-content">
+          <div class="badge-tag" id="hero-badge">
+            <span class="badge-dot"></span>
+            <span>JCI &amp; NABH ACCREDITED &bull; SMART HEALTHCARE OPERATIONS</span>
+          </div>
+
+          <h1 class="hero-title" id="hero-title-h1">
+            Intelligent Hospital Management &amp; <span class="text-gradient">Critical Care Operations</span>
+          </h1>
+
+          <p class="hero-subtitle" id="hero-subtitle-desc">
+            Empowering patients, clinical specialists, and emergency personnel with real-time ICU bed allocation, instant doctor appointments, zero-delay trauma triage, and paperless electronic health records (EHR).
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#booking" class="btn btn-primary" id="btn-hero-booking">
+              <span>Book Doctor Appointment</span>
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
+            </a>
+            <a href="#bed-monitor" class="btn btn-secondary" id="btn-hero-beds">
+              <span>Live Bed Availability Tracker</span>
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><circle cx="6" cy="8" r="2"/></svg>
+            </a>
+          </div>
+
+          <!-- Key Medical Telemetry Metrics Strip -->
+          <div class="hero-metrics-strip" id="hero-metrics">
+            <div class="hero-metric-item">
+              <span class="metric-number text-gradient">99.8%</span>
+              <span class="metric-label">Critical Care Recovery</span>
             </div>
-            <div class="search-preset-hints">
-              <span class="hint-label">Indian Hubs:</span>
-              <button type="button" class="preset-pill">DEL</button>
-              <button type="button" class="preset-pill">BOM</button>
-              <button type="button" class="preset-pill">BLR</button>
-              <button type="button" class="preset-pill">DXB</button>
-              <button type="button" class="preset-pill">LHR</button>
-              <button type="button" class="preset-pill">CCU</button>
-              <button type="button" class="preset-pill">HYD</button>
+            <div class="hero-metric-item">
+              <span class="metric-number text-gradient">450+</span>
+              <span class="metric-label">Super-Specialist Doctors</span>
+            </div>
+            <div class="hero-metric-item">
+              <span class="metric-number text-gradient">1,200+</span>
+              <span class="metric-label">Smart Hospital Beds</span>
+            </div>
+            <div class="hero-metric-item">
+              <span class="metric-number text-gradient">&lt; 4 mins</span>
+              <span class="metric-label">Emergency Trauma Response</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Interactive Live Hospital Bed & Operations Monitor -->
+    <section class="section-spacer" id="bed-monitor" style="padding-top: 0;">
+      <div class="container">
+        
+        <div class="section-header">
+          <div class="badge-tag">
+            <span class="badge-dot"></span>
+            <span>REAL-TIME CLINICAL TELEMETRY</span>
+          </div>
+          <h2 class="section-title">Live Hospital Bed &amp; Ward Capacity Monitor</h2>
+          <p class="section-desc">Interactive ward matrix updated every 30 seconds from central hospital admission and discharge telemetry systems.</p>
+        </div>
+
+        <div class="bed-monitor-card" id="interactive-bed-monitor">
+          <div class="bed-monitor-toolbar">
+            <div class="toolbar-status-badge">
+              <span class="badge-dot"></span>
+              <span>MEDIX CENTRAL WARD TELEMETRY &bull; 0 SEC DELAY</span>
+            </div>
+
+            <!-- Department Ward Switcher Tabs -->
+            <div class="toolbar-tabs" role="tablist" aria-label="Hospital Ward Selection">
+              <button class="toolbar-tab-btn active" id="tab-icu" data-ward="icu">
+                <span>ICU &amp; Critical Care</span>
+              </button>
+              <button class="toolbar-tab-btn" id="tab-general" data-ward="general">
+                <span>Private &amp; Deluxe Suites</span>
+              </button>
+              <button class="toolbar-tab-btn" id="tab-ot" data-ward="ot">
+                <span>Operation Theatres (OT)</span>
+              </button>
+              <button class="toolbar-tab-btn" id="tab-er" data-ward="er">
+                <span>Emergency Trauma Bay</span>
+              </button>
             </div>
           </div>
 
-          <!-- Main Search Controls Form -->
-          <form class="search-controls-grid" id="search-form" onsubmit="return false;">
-            <!-- Origin Input -->
-            <div class="input-card origin-card">
-              <div class="input-icon-label">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/><circle cx="12" cy="19" r="2"/></svg>
-                <span>FROM / ORIGIN</span>
+          <div class="bed-monitor-body" id="bed-stats-content">
+            
+            <div class="bed-stats-grid">
+              
+              <div class="bed-stat-box">
+                <span class="bed-stat-title">Total Allocated Beds</span>
+                <span class="bed-stat-val" id="val-total-beds">120</span>
+                <span style="font-size: var(--text-xs); color: var(--text-secondary);">Equipped with multi-parameter monitors</span>
               </div>
-              <div class="input-field-wrap">
-                <div class="airport-code-badge">DEL</div>
-                <div class="text-inputs">
-                  <input type="text" id="origin-input" class="main-input" value="Delhi Indira Gandhi Intl" placeholder="City or airport">
-                  <span class="sub-label">New Delhi, India (Terminal 3)</span>
-                </div>
+
+              <div class="bed-stat-box">
+                <span class="bed-stat-title">Currently Occupied</span>
+                <span class="bed-stat-val" id="val-occupied-beds" style="color: var(--med-blue);">102</span>
+                <span style="font-size: var(--text-xs); color: var(--text-secondary);" id="val-occupancy-rate">85% Occupancy Rate</span>
+              </div>
+
+              <div class="bed-stat-box">
+                <span class="bed-stat-title">Beds Immediately Available</span>
+                <span class="bed-stat-val" id="val-available-beds" style="color: var(--med-emerald);">18</span>
+                <span style="font-size: var(--text-xs); color: var(--med-emerald);">Ready for instantaneous admission</span>
+              </div>
+
+              <div class="bed-stat-box">
+                <span class="bed-stat-title">Ventilator &amp; ECMO Support</span>
+                <span class="bed-stat-val" id="val-ventilator-beds" style="color: var(--med-cyan);">14 Units</span>
+                <span style="font-size: var(--text-xs); color: var(--text-secondary);">Active life-support reserve</span>
+              </div>
+
+            </div>
+
+            <div class="occupancy-bar-wrap">
+              <div style="display: flex; justify-content: space-between; font-size: var(--text-xs); color: var(--text-secondary);">
+                <span id="occupancy-label">Current Ward Bed Utilization</span>
+                <span id="occupancy-percentage" style="font-weight: 700; color: var(--text-main);">85% Capacity</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" id="occupancy-progress-bar" style="width: 85%;"></div>
               </div>
             </div>
 
-            <!-- Swap Button -->
-            <div class="swap-action-wrap">
-              <button type="button" class="swap-btn" id="btn-swap-airports" title="Swap Origin and Destination" aria-label="Swap origin and destination">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m8 3 4 8 5-5 5 15-22-4 8-4"/></svg>
-              </button>
-            </div>
+          </div>
+        </div>
 
-            <!-- Destination Input -->
-            <div class="input-card dest-card">
-              <div class="input-icon-label">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
-                <span>TO / DESTINATION</span>
-              </div>
-              <div class="input-field-wrap">
-                <div class="airport-code-badge badge-dest">BOM</div>
-                <div class="text-inputs">
-                  <input type="text" id="dest-input" class="main-input" value="Mumbai Chhatrapati Shivaji" placeholder="City or airport">
-                  <span class="sub-label">Mumbai, Maharashtra (Terminal 2)</span>
-                </div>
-              </div>
-            </div>
+      </div>
+    </section>
 
-            <!-- Flight Code Quick Input -->
-            <div class="input-card flightno-card">
-              <div class="input-icon-label">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-                <span>FLIGHT NUMBER</span>
-              </div>
-              <div class="input-field-wrap">
-                <div class="text-inputs full-width">
-                  <input type="text" id="flightno-input" class="main-input mono-font" value="6E-205" placeholder="e.g. 6E205, AI101">
-                  <span class="sub-label">IndiGo • Airbus A321neo</span>
-                </div>
-              </div>
-            </div>
+    <!-- Medical Specialties Bento Grid -->
+    <section class="section-spacer" id="departments" aria-labelledby="departments-title">
+      <div class="container">
+        
+        <div class="section-header">
+          <div class="badge-tag">
+            <span class="badge-dot"></span>
+            <span>SUPER-SPECIALTY DEPARTMENTS</span>
+          </div>
+          <h2 class="section-title" id="departments-title">World-Class Clinical Specialties</h2>
+          <p class="section-desc">Pioneering medical protocols, precision robotic surgeries, and 24x7 multi-disciplinary emergency response.</p>
+        </div>
 
-            <!-- Departure Date Picker -->
-            <div class="input-card date-card">
-              <div class="input-icon-label">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-                <span>DEPARTURE DATE</span>
+        <div class="bento-grid">
+          
+          <!-- Bento 1: Cardiology -->
+          <article class="bento-card col-span-8">
+            <div>
+              <div class="card-icon-bubble bubble-red">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
               </div>
-              <div class="input-field-wrap">
-                <div class="text-inputs full-width">
-                  <input type="date" id="date-input" class="main-input date-input" value="2026-09-29">
-                  <span class="sub-label">Today • 64 Flights on Route</span>
-                </div>
+              <h3 class="bento-card-title">Cardiology &amp; Cardiovascular Surgery</h3>
+              <p class="bento-card-desc">
+                State-of-the-art Cath Labs operating round-the-clock for primary angioplasty, heart failure therapies, minimally invasive valve replacements, and pediatric cardiac surgery.
+              </p>
+            </div>
+            <div class="specialty-features">
+              <div class="feature-pill-item">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Door-to-Balloon time: under 42 minutes (Gold Standard)</span>
+              </div>
+              <div class="feature-pill-item">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>3 Bi-Plane Digital Cath Labs with 3D Echo guidance</span>
               </div>
             </div>
+          </article>
 
-            <!-- Return Date Picker -->
-            <div class="input-card return-card">
-              <div class="input-icon-label">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg>
-                <span>RETURN DATE</span>
+          <!-- Bento 2: Neurology & Stroke Bay -->
+          <article class="bento-card col-span-4">
+            <div>
+              <div class="card-icon-bubble bubble-blue">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 3.37 2.08 6.25 5 7.42V20a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-2.58c2.92-1.17 5-4.05 5-7.42a8 8 0 0 0-8-8z"/></svg>
               </div>
-              <div class="input-field-wrap">
-                <div class="text-inputs full-width">
-                  <input type="date" id="return-input" class="main-input date-input" value="2026-10-05">
-                  <span class="sub-label">+6 Days Return Route</span>
-                </div>
+              <h3 class="bento-card-title">Neurology &amp; Stroke Care</h3>
+              <p class="bento-card-desc">
+                Comprehensive stroke bay with neuro-navigation systems, clot retrieval therapies, deep brain stimulation, and microscopic spine surgeries.
+              </p>
+            </div>
+            <div class="specialty-features">
+              <div class="feature-pill-item">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>24x7 Stroke Rapid Assessment &amp; MRI</span>
               </div>
             </div>
+          </article>
 
-            <!-- Search CTA Button -->
-            <div class="search-cta-wrap">
-              <button type="submit" class="hero-search-btn" id="btn-submit-search" aria-label="Search Flight Status">
-                <div class="btn-sheen" aria-hidden="true"></div>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><polygon points="11 8 13 12 16 12 13 14 14 18 11 15 8 18 9 14 6 12 9 12 11 8"/></svg>
-                <div class="btn-text-block">
-                  <span class="btn-main-text">FIND FLIGHT</span>
-                  <span class="btn-sub-text">SCAN AIRSPACE RADAR</span>
-                </div>
-              </button>
+          <!-- Bento 3: Orthopedics & Robotic Replacement -->
+          <article class="bento-card col-span-4">
+            <div>
+              <div class="card-icon-bubble bubble-emerald">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+              </div>
+              <h3 class="bento-card-title">Orthopedics &amp; Joint Reconstruction</h3>
+              <p class="bento-card-desc">
+                Computer-navigated robotic knee &amp; hip replacements, sports medicine, complex fracture stabilization, and specialized arthroscopic repairs.
+              </p>
+            </div>
+            <div class="specialty-features">
+              <div class="feature-pill-item">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Robotic sub-millimeter precision implants</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Bento 4: Oncology & Precision Radiotherapy -->
+          <article class="bento-card col-span-8">
+            <div>
+              <div class="card-icon-bubble bubble-purple">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+              </div>
+              <h3 class="bento-card-title">Comprehensive Oncology &amp; Genomic Therapy</h3>
+              <p class="bento-card-desc">
+                Multi-disciplinary cancer boards offering TrueBeam linear accelerator radiation, targeted immunotherapy, minimally invasive surgical oncology, and bone marrow transplants.
+              </p>
+            </div>
+            <div class="specialty-features">
+              <div class="feature-pill-item">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Personalized molecular tumor profiling</span>
+              </div>
+              <div class="feature-pill-item">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Dedicated Daycare Chemotherapy Lounge</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Interactive Appointment Booking Component -->
+    <section class="section-spacer" id="booking" aria-labelledby="booking-title">
+      <div class="container">
+        
+        <div class="section-header">
+          <div class="badge-tag">
+            <span class="badge-dot"></span>
+            <span>INSTANT CLINICAL SCHEDULING</span>
+          </div>
+          <h2 class="section-title" id="booking-title">Book an In-Person or Telehealth Consultation</h2>
+          <p class="section-desc">Schedule directly with senior clinical specialists. Real-time slot allocation with zero standing in hospital queues.</p>
+        </div>
+
+        <div class="appointment-booking-wrap">
+          <form id="appointment-form">
+            <div class="booking-form-grid">
+              
+              <div class="form-group">
+                <label for="patient-name" class="form-label">Patient Full Name</label>
+                <input type="text" id="patient-name" class="form-input" placeholder="e.g. Rahul Sharma" required>
+              </div>
+
+              <div class="form-group">
+                <label for="patient-phone" class="form-label">Contact Mobile Number</label>
+                <input type="tel" id="patient-phone" class="form-input" placeholder="+91 98765 43210" required>
+              </div>
+
+              <div class="form-group">
+                <label for="patient-dept" class="form-label">Clinical Specialty Department</label>
+                <select id="patient-dept" class="form-select" required>
+                  <option value="">Select Medical Department...</option>
+                  <option value="cardio">Cardiology &amp; Heart Sciences</option>
+                  <option value="neuro">Neurology &amp; Neurosurgery</option>
+                  <option value="ortho">Orthopedics &amp; Joint Reconstruction</option>
+                  <option value="onco">Oncology &amp; Cancer Care</option>
+                  <option value="pedia">Pediatrics &amp; Child Health</option>
+                  <option value="gen">Internal &amp; General Medicine</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="patient-doctor" class="form-label">Select Specialist Doctor</label>
+                <select id="patient-doctor" class="form-select" required>
+                  <option value="">Select Specialist...</option>
+                  <option value="sharma">Dr. Arvind Sharma (Chief of Cardiology)</option>
+                  <option value="nair">Dr. Priya Nair (Lead Neurosurgeon)</option>
+                  <option value="singh">Dr. Vikram Singhania (Head of Orthopedics)</option>
+                  <option value="iyer">Dr. Meera Iyer (Senior Oncologist)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="patient-date" class="form-label">Preferred Date</label>
+                <input type="date" id="patient-date" class="form-input" required>
+              </div>
+
+              <div class="form-group">
+                <label for="patient-slot" class="form-label">Preferred Time Window</label>
+                <select id="patient-slot" class="form-select" required>
+                  <option value="morning">Morning (09:00 AM - 12:00 PM)</option>
+                  <option value="afternoon">Afternoon (01:00 PM - 04:00 PM)</option>
+                  <option value="evening">Evening (05:00 PM - 08:00 PM)</option>
+                </select>
+              </div>
+
+              <div class="form-group col-full">
+                <button type="submit" class="btn btn-primary" id="btn-submit-appointment" style="width: 100%;">
+                  <span>Confirm Clinical Appointment &amp; Generate Token</span>
+                  <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </button>
+              </div>
+
             </div>
           </form>
 
-          <!-- Quick Route Stats Bar below search -->
-          <div class="search-meta-footer">
-            <div class="meta-tag">
-              <span class="dot-active"></span>
-              <strong>Direct Routes:</strong> 64 Daily Departures between Delhi (DEL) and Mumbai (BOM)
-            </div>
-            <div class="meta-tag">
-              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              <span>Avg Flight Time: <strong>2h 10m</strong></span>
-            </div>
-            <div class="meta-tag">
-              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-              <span>Distance: <strong>1,148 km</strong> (Golden Route of India)</span>
+          <!-- Dynamic Booking Confirmation Badge -->
+          <div class="booking-confirmation-banner" id="booking-confirmation" role="alert">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <div>
+              <strong>Appointment Confirmed!</strong> Token <code style="background: rgba(16, 185, 129, 0.15); padding: 2px 6px; border-radius: 4px; color: var(--text-main);">#MED-842</code> has been issued. An SMS confirmation and QR check-in pass have been dispatched to your mobile.
             </div>
           </div>
         </div>
+
       </div>
     </section>
 
-    <!-- ======================================================== -->
-    <!-- SECTION 2: FLIGHT STATUS BOARD (LIVE FIDS)               -->
-    <!-- ======================================================== -->
-    <section class="section-container" id="flight-board">
-      <div class="section-header-row">
-        <div>
-          <div class="section-kicker">
-            <span class="fids-signal-indicator"></span>
-            LIVE AIRPORT OPERATIONS DISPLAY (FIDS) // DELHI IGI
+    <!-- Clinical Excellence Comparison Matrix -->
+    <section class="section-spacer" id="comparison" aria-labelledby="comparison-title">
+      <div class="container">
+        
+        <div class="section-header">
+          <div class="badge-tag">
+            <span class="badge-dot"></span>
+            <span>CLINICAL STANDARDS</span>
           </div>
-          <h2 class="section-title">Live Domestic & International Flights</h2>
-          <p class="section-lead">Real-time status feed synchronized with Airport Authority of India (AAI) and Delhi International Airport Ltd (DIAL).</p>
+          <h2 class="section-title" id="comparison-title">Traditional Hospital vs Medix Smart Healthcare</h2>
+          <p class="section-desc">See how digital clinical automation reduces waiting times, prevents adverse drug interactions, and accelerates emergency response.</p>
         </div>
 
-        <div class="board-clock-panel">
-          <div class="clock-display">
-            <span class="clock-label">INDIAN STANDARD TIME</span>
-            <span class="clock-digits mono-font">00:40:18</span>
-            <span class="clock-zone">IST (UTC+5:30)</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Pure CSS Interactive Tabs for Departures and Arrivals -->
-      <div class="fids-wrapper">
-        <input type="radio" name="board-direction" id="fids-tab-dep" class="board-radio" checked>
-        <input type="radio" name="board-direction" id="fids-tab-arr" class="board-radio">
-
-        <!-- Board Toolbar -->
-        <div class="board-controls-bar">
-          <!-- Direction Selector -->
-          <div class="board-tab-switcher">
-            <label for="fids-tab-dep" class="fids-tab-label dep-tab" id="label-dep">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 18h20"/><path d="M20 7 11.5 15.5 8 12 3 17"/></svg>
-              <span>DEPARTURES</span>
-              <span class="counter-badge">10</span>
-            </label>
-            <label for="fids-tab-arr" class="fids-tab-label arr-tab" id="label-arr">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 18h20"/><path d="m4 7 8.5 8.5L16 12l5 5"/></svg>
-              <span>ARRIVALS</span>
-              <span class="counter-badge">8</span>
-            </label>
-          </div>
-
-          <!-- Quick Filters -->
-          <div class="board-filter-group">
-            <span class="filter-label">Terminal:</span>
-            <button type="button" class="filter-chip active">All Terminals</button>
-            <button type="button" class="filter-chip">T1 Domestic (Low-Cost)</button>
-            <button type="button" class="filter-chip">T2 Domestic</button>
-            <button type="button" class="filter-chip">T3 Integrated Hub</button>
-          </div>
-
-          <div class="board-legend">
-            <span class="legend-item"><span class="status-dot dot-ontime"></span> On Time</span>
-            <span class="legend-item"><span class="status-dot dot-boarding"></span> Boarding</span>
-            <span class="legend-item"><span class="status-dot dot-delayed"></span> Delayed</span>
-            <span class="legend-item"><span class="status-dot dot-gate"></span> Gate Change</span>
-          </div>
-        </div>
-
-        <!-- ================= DEPARTURES TABLE ================= -->
-        <div class="board-table-container fids-departures-panel">
-          <div class="table-scroll-wrapper">
-            <table class="fids-table" id="departures-table">
-              <thead>
-                <tr>
-                  <th scope="col" class="th-airline">AIRLINE & FLIGHT</th>
-                  <th scope="col" class="th-dest">DESTINATION</th>
-                  <th scope="col" class="th-sched">SCHED</th>
-                  <th scope="col" class="th-est">EST / ACTUAL</th>
-                  <th scope="col" class="th-terminal">TERMINAL</th>
-                  <th scope="col" class="th-gate">GATE</th>
-                  <th scope="col" class="th-status">STATUS</th>
-                  <th scope="col" class="th-details">REMARKS</th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- Flight 1: IndiGo 6E 205 (Domestic Flagship) -->
-                <tr class="fids-row row-boarding">
-                  <td class="td-airline">
-                    <div class="airline-cell">
-                      <div class="airline-badge badge-6e" title="IndiGo">
-                        <svg viewBox="0 0 32 32" class="airline-vector"><path d="M6 10l20 6-20 6 6-6z" fill="currentColor"/></svg>
-                      </div>
-                      <div class="flight-identity">
-                        <span class="flight-number mono-font">6E 205</span>
-                        <span class="airline-name">IndiGo Airlines</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td class="td-dest">
-                    <div class="dest-cell">
-                      <span class="dest-city">MUMBAI INTL</span>
-                      <span class="dest-iata">BOM / VABB</span>
-                    </div>
-                  </td>
-                  <td class="td-sched mono-font">01:05</td>
-                  <td class="td-est mono-font text-highlight">01:05</td>
-                  <td class="td-terminal">
-                    <span class="terminal-badge">T1D</span>
-                  </td>
-                  <td class="td-gate">
-                    <div class="gate-cell">
-                      <span class="gate-code mono-font">06</span>
-                      <span class="gate-walk">DigiYatra FastGate</span>
-                    </div>
-                  </td>
-                  <td class="td-status">
-                    <div class="status-chip chip-boarding">
-                      <span class="chip-pulse"></span>
-                      <span>BOARDING</span>
-                    </div>
-                  </td>
-                  <td class="td-remarks">
-                    <span class="remarks-text">Airbus A321neo • Final Call</span>
-                  </td>
-                </tr>
-
-                <!-- Flight 2: Air India AI 101 (International Long-Haul) -->
-                <tr class="fids-row row-ontime">
-                  <td class="td-airline">
-                    <div class="airline-cell">
-                      <div class="airline-badge badge-ai" title="Air India">
-                        <svg viewBox="0 0 32 32" class="airline-vector"><path d="M4 18l24-10-8 16-8-3z" fill="currentColor"/></svg>
-                      </div>
-                      <div class="flight-identity">
-                        <span class="flight-number mono-font">AI 101</span>
-                        <span class="airline-name">Air India (Tata)</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td class="td-dest">
-                    <div class="dest-cell">
-                      <span class="dest-city">NEW YORK JFK</span>
-                      <span class="dest-iata">JFK / KJFK</span>
-                    </div>
-                  </td>
-                  <td class="td-sched mono-font">01:30</td>
-                  <td class="td-est mono-font">01:30</td>
-                  <td class="td-terminal">
-                    <span class="terminal-badge">T3</span>
-                  </td>
-                  <td class="td-gate">
-                    <div class="gate-cell">
-                      <span class="gate-code mono-font">18</span>
-                      <span class="gate-walk">6 min walk</span>
-                    </div>
-                  </td>
-                  <td class="td-status">
-                    <div class="status-chip chip-ontime">
-                      <span class="chip-dot"></span>
-                      <span>ON TIME</span>
-                    </div>
-                  </td>
-                  <td class="td-remarks">
-                    <span class="remarks-text">Boeing 777-300ER • Gate Open</span>
-                  </td>
-                </tr>
-
-                <!-- Flight 3: Vistara UK 995 -->
-                <tr class="fids-row row-ontime">
-                  <td class="td-airline">
-                    <div class="airline-cell">
-                      <div class="airline-badge badge-uk" title="Vistara">
-                        <svg viewBox="0 0 32 32" class="airline-vector"><path d="M16 4l12 12-12 12L4 16z" fill="currentColor"/></svg>
-                      </div>
-                      <div class="flight-identity">
-                        <span class="flight-number mono-font">UK 995</span>
-                        <span class="airline-name">Vistara / Air India</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td class="td-dest">
-                    <div class="dest-cell">
-                      <span class="dest-city">BENGALURU</span>
-                      <span class="dest-iata">BLR / VOBL</span>
-                    </div>
-                  </td>
-                  <td class="td-sched mono-font">01:45</td>
-                  <td class="td-est mono-font">01:45</td>
-                  <td class="td-terminal">
-                    <span class="terminal-badge">T3</span>
-                  </td>
-                  <td class="td-gate">
-                    <div class="gate-cell">
-                      <span class="gate-code mono-font">22</span>
-                      <span class="gate-walk">4 min walk</span>
-                    </div>
-                  </td>
-                  <td class="td-status">
-                    <div class="status-chip chip-ontime">
-                      <span class="chip-dot"></span>
-                      <span>ON TIME</span>
-                    </div>
-                  </td>
-                  <td class="td-remarks">
-                    <span class="remarks-text">Premium Economy Available</span>
-                  </td>
-                </tr>
-
-                <!-- Flight 4: Akasa Air QP 1302 -->
-                <tr class="fids-row row-ontime">
-                  <td class="td-airline">
-                    <div class="airline-cell">
-                      <div class="airline-badge badge-qp" title="Akasa Air">
-                        <svg viewBox="0 0 32 32" class="airline-vector"><path d="M4 16c6-8 18-8 24 0-6 4-18 4-24 0z" fill="currentColor"/></svg>
-                      </div>
-                      <div class="flight-identity">
-                        <span class="flight-number mono-font">QP 1302</span>
-                        <span class="airline-name">Akasa Air</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td class="td-dest">
-                    <div class="dest-cell">
-                      <span class="dest-city">GOA MANOHAR</span>
-                      <span class="dest-iata">GOX / VOGO</span>
-                    </div>
-                  </td>
-                  <td class="td-sched mono-font">02:10</td>
-                  <td class="td-est mono-font">02:10</td>
-                  <td class="td-terminal">
-                    <span class="terminal-badge">T2</span>
-                  </td>
-                  <td class="td-gate">
-                    <div class="gate-cell">
-                      <span class="gate-code mono-font">12</span>
-                      <span class="gate-walk">3 min walk</span>
-                    </div>
-                  </td>
-                  <td class="td-status">
-                    <div class="status-chip chip-ontime">
-                      <span class="chip-dot"></span>
-                      <span>ON TIME</span>
-                    </div>
-                  </td>
-                  <td class="td-remarks">
-                    <span class="remarks-text">Boeing 737 MAX 8 • Security Open</span>
-                  </td>
-                </tr>
-
-                <!-- Flight 5: Emirates EK 511 -->
-                <tr class="fids-row row-boarding">
-                  <td class="td-airline">
-                    <div class="airline-cell">
-                      <div class="airline-badge badge-ek" title="Emirates">
-                        <svg viewBox="0 0 32 32" class="airline-vector"><path d="M6 8h20v4H6zm0 6h16v4H6zm0 6h12v4H6z" fill="currentColor"/></svg>
-                      </div>
-                      <div class="flight-identity">
-                        <span class="flight-number mono-font">EK 511</span>
-                        <span class="airline-name">Emirates</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td class="td-dest">
-                    <div class="dest-cell">
-                      <span class="dest-city">DUBAI INTL</span>
-                      <span class="dest-iata">DXB / OMDB</span>
-                    </div>
-                  </td>
-                  <td class="td-sched mono-font">02:25</td>
-                  <td class="td-est mono-font text-highlight">02:25</td>
-                  <td class="td-terminal">
-                    <span class="terminal-badge">T3</span>
-                  </td>
-                  <td class="td-gate">
-                    <div class="gate-cell">
-                      <span class="gate-code mono-font">15</span>
-                      <span class="gate-walk">8 min walk</span>
-                    </div>
-                  </td>
-                  <td class="td-status">
-                    <div class="status-chip chip-boarding">
-                      <span class="chip-pulse"></span>
-                      <span>BOARDING</span>
-                    </div>
-                  </td>
-                  <td class="td-remarks">
-                    <span class="remarks-text">Airbus A380-800 • Gate 15</span>
-                  </td>
-                </tr>
-
-                <!-- Flight 6: SpiceJet SG 819 (Delayed) -->
-                <tr class="fids-row row-delayed">
-                  <td class="td-airline">
-                    <div class="airline-cell">
-                      <div class="airline-badge badge-sg" title="SpiceJet">
-                        <svg viewBox="0 0 32 32" class="airline-vector"><circle cx="16" cy="16" r="10" fill="currentColor"/><circle cx="16" cy="16" r="4" fill="#fff"/></svg>
-                      </div>
-                      <div class="flight-identity">
-                        <span class="flight-number mono-font">SG 819</span>
-                        <span class="airline-name">SpiceJet</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td class="td-dest">
-                    <div class="dest-cell">
-                      <span class="dest-city">DUBAI INTL</span>
-                      <span class="dest-iata">DXB / OMDB</span>
-                    </div>
-                  </td>
-                  <td class="td-sched mono-font">02:40</td>
-                  <td class="td-est mono-font text-delayed">03:05</td>
-                  <td class="td-terminal">
-                    <span class="terminal-badge">T3</span>
-                  </td>
-                  <td class="td-gate">
-                    <div class="gate-cell">
-                      <span class="gate-code mono-font">04</span>
-                      <span class="gate-walk">10 min walk</span>
-                    </div>
-                  </td>
-                  <td class="td-status">
-                    <div class="status-chip chip-delayed">
-                      <span class="chip-exclamation">!</span>
-                      <span>DELAYED +25M</span>
-                    </div>
-                  </td>
-                  <td class="td-remarks">
-                    <span class="remarks-text text-warning">Late Inbound Craft</span>
-                  </td>
-                </tr>
-
-                <!-- Flight 7: Air India Express IX 145 (Gate Change) -->
-                <tr class="fids-row row-gatechange">
-                  <td class="td-airline">
-                    <div class="airline-cell">
-                      <div class="airline-badge badge-ix" title="Air India Express">
-                        <svg viewBox="0 0 32 32" class="airline-vector"><polygon points="6,6 26,16 6,26" fill="currentColor"/></svg>
-                      </div>
-                      <div class="flight-identity">
-                        <span class="flight-number mono-font">IX 145</span>
-                        <span class="airline-name">AI Express</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td class="td-dest">
-                    <div class="dest-cell">
-                      <span class="dest-city">SHARJAH INTL</span>
-                      <span class="dest-iata">SHJ / OMSJ</span>
-                    </div>
-                  </td>
-                  <td class="td-sched mono-font">03:00</td>
-                  <td class="td-est mono-font">03:00</td>
-                  <td class="td-terminal">
-                    <span class="terminal-badge">T3</span>
-                  </td>
-                  <td class="td-gate">
-                    <div class="gate-cell">
-                      <span class="gate-code mono-font highlight-gate">08</span>
-                      <span class="gate-walk badge-urgent">GATE CHANGED</span>
-                    </div>
-                  </td>
-                  <td class="td-status">
-                    <div class="status-chip chip-gate">
-                      <span class="chip-dot"></span>
-                      <span>GATE CHANGE</span>
-                    </div>
-                  </td>
-                  <td class="td-remarks">
-                    <span class="remarks-text text-amber">Moved from Gate 14</span>
-                  </td>
-                </tr>
-
-                <!-- Flight 8: Singapore Airlines SQ 403 -->
-                <tr class="fids-row row-ontime">
-                  <td class="td-airline">
-                    <div class="airline-cell">
-                      <div class="airline-badge badge-sq" title="Singapore Airlines">
-                        <svg viewBox="0 0 32 32" class="airline-vector"><path d="M28 6L14 16l-8-1 14-6 8-3zM4 17l6 1 12-8-18 7z" fill="currentColor"/></svg>
-                      </div>
-                      <div class="flight-identity">
-                        <span class="flight-number mono-font">SQ 403</span>
-                        <span class="airline-name">Singapore Airlines</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td class="td-dest">
-                    <div class="dest-cell">
-                      <span class="dest-city">SINGAPORE CHANGI</span>
-                      <span class="dest-iata">SIN / WSSS</span>
-                    </div>
-                  </td>
-                  <td class="td-sched mono-font">03:20</td>
-                  <td class="td-est mono-font">03:20</td>
-                  <td class="td-terminal">
-                    <span class="terminal-badge">T3</span>
-                  </td>
-                  <td class="td-gate">
-                    <div class="gate-cell">
-                      <span class="gate-code mono-font">21</span>
-                      <span class="gate-walk">7 min walk</span>
-                    </div>
-                  </td>
-                  <td class="td-status">
-                    <div class="status-chip chip-ontime">
-                      <span class="chip-dot"></span>
-                      <span>ON TIME</span>
-                    </div>
-                  </td>
-                  <td class="td-remarks">
-                    <span class="remarks-text">Boeing 787-10 Dreamliner</span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- ================= ARRIVALS TABLE ================= -->
-        <div class="board-table-container fids-arrivals-panel">
-          <div class="table-scroll-wrapper">
-            <table class="fids-table" id="arrivals-table">
-              <thead>
-                <tr>
-                  <th scope="col" class="th-airline">AIRLINE & FLIGHT</th>
-                  <th scope="col" class="th-dest">ORIGIN</th>
-                  <th scope="col" class="th-sched">STA (SCHED)</th>
-                  <th scope="col" class="th-est">ETA / ACTUAL</th>
-                  <th scope="col" class="th-terminal">TERMINAL</th>
-                  <th scope="col" class="th-belt">BAGGAGE BELT</th>
-                  <th scope="col" class="th-status">STATUS</th>
-                  <th scope="col" class="th-details">REMARKS</th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- Arrival 1: IndiGo 6E 534 from Bengaluru -->
-                <tr class="fids-row row-ontime">
-                  <td class="td-airline">
-                    <div class="airline-cell">
-                      <div class="airline-badge badge-6e" title="IndiGo">
-                        <svg viewBox="0 0 32 32" class="airline-vector"><path d="M6 10l20 6-20 6 6-6z" fill="currentColor"/></svg>
-                      </div>
-                      <div class="flight-identity">
-                        <span class="flight-number mono-font">6E 534</span>
-                        <span class="airline-name">IndiGo</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td class="td-dest">
-                    <div class="dest-cell">
-                      <span class="dest-city">BENGALURU KEMPEGOWDA</span>
-                      <span class="dest-iata">BLR / VOBL</span>
-                    </div>
-                  </td>
-                  <td class="td-sched mono-font">00:30</td>
-                  <td class="td-est mono-font text-highlight">00:25</td>
-                  <td class="td-terminal">
-                    <span class="terminal-badge">T2</span>
-                  </td>
-                  <td class="td-belt">
-                    <div class="belt-cell">
-                      <span class="belt-code mono-font">BELT 05</span>
-                      <span class="belt-status text-green">Delivering Bags</span>
-                    </div>
-                  </td>
-                  <td class="td-status">
-                    <div class="status-chip chip-ontime">
-                      <span class="chip-dot"></span>
-                      <span>LANDED 00:25</span>
-                    </div>
-                  </td>
-                  <td class="td-remarks">
-                    <span class="remarks-text">Runway 28 • DigiYatra Exit</span>
-                  </td>
-                </tr>
-
-                <!-- Arrival 2: Air India AI 144 from Newark -->
-                <tr class="fids-row row-ontime">
-                  <td class="td-airline">
-                    <div class="airline-cell">
-                      <div class="airline-badge badge-ai" title="Air India">
-                        <svg viewBox="0 0 32 32" class="airline-vector"><path d="M4 18l24-10-8 16-8-3z" fill="currentColor"/></svg>
-                      </div>
-                      <div class="flight-identity">
-                        <span class="flight-number mono-font">AI 144</span>
-                        <span class="airline-name">Air India</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td class="td-dest">
-                    <div class="dest-cell">
-                      <span class="dest-city">NEWARK LIBERTY</span>
-                      <span class="dest-iata">EWR / KEWR</span>
-                    </div>
-                  </td>
-                  <td class="td-sched mono-font">00:40</td>
-                  <td class="td-est mono-font text-highlight">00:35</td>
-                  <td class="td-terminal">
-                    <span class="terminal-badge">T3</span>
-                  </td>
-                  <td class="td-belt">
-                    <div class="belt-cell">
-                      <span class="belt-code mono-font">BELT 14</span>
-                      <span class="belt-status text-green">Delivering Bags</span>
-                    </div>
-                  </td>
-                  <td class="td-status">
-                    <div class="status-chip chip-ontime">
-                      <span class="chip-dot"></span>
-                      <span>TAXIING</span>
-                    </div>
-                  </td>
-                  <td class="td-remarks">
-                    <span class="remarks-text">Boeing 777-200LR • Stand 32</span>
-                  </td>
-                </tr>
-
-                <!-- Arrival 3: Qatar Airways QR 578 from Doha -->
-                <tr class="fids-row row-ontime">
-                  <td class="td-airline">
-                    <div class="airline-cell">
-                      <div class="airline-badge badge-qr" title="Qatar Airways">
-                        <svg viewBox="0 0 32 32" class="airline-vector"><path d="M16 4a12 12 0 1 0 12 12A12 12 0 0 0 16 4zm-2 16l-4-4 2-2 2 2 6-6 2 2z" fill="currentColor"/></svg>
-                      </div>
-                      <div class="flight-identity">
-                        <span class="flight-number mono-font">QR 578</span>
-                        <span class="airline-name">Qatar Airways</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td class="td-dest">
-                    <div class="dest-cell">
-                      <span class="dest-city">DOHA HAMAD</span>
-                      <span class="dest-iata">DOH / OTHH</span>
-                    </div>
-                  </td>
-                  <td class="td-sched mono-font">00:55</td>
-                  <td class="td-est mono-font">00:55</td>
-                  <td class="td-terminal">
-                    <span class="terminal-badge">T3</span>
-                  </td>
-                  <td class="td-belt">
-                    <div class="belt-cell">
-                      <span class="belt-code mono-font">BELT 11</span>
-                      <span class="belt-status text-amber">First Bag in 6m</span>
-                    </div>
-                  </td>
-                  <td class="td-status">
-                    <div class="status-chip chip-ontime">
-                      <span class="chip-dot"></span>
-                      <span>ON APPROACH</span>
-                    </div>
-                  </td>
-                  <td class="td-remarks">
-                    <span class="remarks-text">T3 Customs Green Channel</span>
-                  </td>
-                </tr>
-
-                <!-- Arrival 4: British Airways BA 143 from London -->
-                <tr class="fids-row row-delayed">
-                  <td class="td-airline">
-                    <div class="airline-cell">
-                      <div class="airline-badge badge-ba" title="British Airways">
-                        <svg viewBox="0 0 32 32" class="airline-vector"><path d="M4 14c8-4 16-4 24 0-4 6-12 10-24 0z" fill="currentColor"/></svg>
-                      </div>
-                      <div class="flight-identity">
-                        <span class="flight-number mono-font">BA 143</span>
-                        <span class="airline-name">British Airways</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td class="td-dest">
-                    <div class="dest-cell">
-                      <span class="dest-city">LONDON HEATHROW</span>
-                      <span class="dest-iata">LHR / EGLL</span>
-                    </div>
-                  </td>
-                  <td class="td-sched mono-font">01:10</td>
-                  <td class="td-est mono-font text-delayed">01:35</td>
-                  <td class="td-terminal">
-                    <span class="terminal-badge">T3</span>
-                  </td>
-                  <td class="td-belt">
-                    <div class="belt-cell">
-                      <span class="belt-code mono-font">BELT 08</span>
-                      <span class="belt-status text-slate">Standby</span>
-                    </div>
-                  </td>
-                  <td class="td-status">
-                    <div class="status-chip chip-delayed">
-                      <span class="chip-exclamation">!</span>
-                      <span>DELAYED +25M</span>
-                    </div>
-                  </td>
-                  <td class="td-remarks">
-                    <span class="remarks-text text-warning">Airway Slot Delay</span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- Board Information Footer -->
-        <div class="board-table-footer">
-          <div class="footer-stat">
-            <span class="stat-value text-green">95.4%</span>
-            <span class="stat-desc">DEL On-Time Departure Index</span>
-          </div>
-          <div class="footer-stat">
-            <span class="stat-value text-indigo">4.2 min</span>
-            <span class="stat-desc">Avg DigiYatra Biometric Gate Passage</span>
-          </div>
-          <div class="footer-stat">
-            <span class="stat-value text-cyan">12.8 min</span>
-            <span class="stat-desc">Average First Bag on Carousel Belt</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ======================================================== -->
-    <!-- SECTION 3: TERMINAL GUIDE CARDS (DELHI IGI HUB)          -->
-    <!-- ======================================================== -->
-    <section class="section-container" id="terminal-guide">
-      <div class="section-header-row">
-        <div>
-          <div class="section-kicker">PASSENGER SERVICES & TERMINAL WAYFINDING</div>
-          <h2 class="section-title">Delhi Airport Terminal Guide & Amenities</h2>
-          <p class="section-lead">Locate baggage belts, DigiYatra entry, luxury Indian lounges, forex counters, and Airport Metro Express.</p>
-        </div>
-
-        <div class="terminal-selector-badges">
-          <span class="hub-pill active">Terminal 3 (Integrated Hub)</span>
-          <span class="hub-pill">Terminal 2 (Domestic Operations)</span>
-          <span class="hub-pill">Terminal 1 (New Low-Cost Carrier Hub)</span>
-        </div>
-      </div>
-
-      <!-- Terminal Cards Grid -->
-      <div class="terminal-guide-grid">
-        <!-- CARD 1: Baggage Claim Belts & Customs -->
-        <article class="guide-card" id="card-baggage">
-          <div class="card-hero-icon icon-baggage">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 20h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2Z"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><circle cx="8" cy="20" r="2"/><circle cx="16" cy="20" r="2"/><path d="M10 11h4"/><path d="M10 15h4"/></svg>
-          </div>
-          <div class="card-badge">LEVEL 0 • ARRIVALS PIER (T3 & T1)</div>
-          <h3 class="card-title">Baggage Belts (Carousels 1–14) & Customs</h3>
-          <p class="card-desc">
-            Directly post immigration. High-speed automated RFID sorting carousels, DigiYatra priority tag belts, and Indian Customs Green & Red channels.
-          </p>
-
-          <div class="belt-status-widget">
-            <div class="widget-row">
-              <span class="belt-num mono-font">BELT 05</span>
-              <span class="flight-tag mono-font">6E 534 (BLR)</span>
-              <span class="status-indicator-tag green">Delivering</span>
-            </div>
-            <div class="widget-row">
-              <span class="belt-num mono-font">BELT 14</span>
-              <span class="flight-tag mono-font">AI 144 (EWR)</span>
-              <span class="status-indicator-tag green">Delivering</span>
-            </div>
-            <div class="widget-row">
-              <span class="belt-num mono-font">BELT 11</span>
-              <span class="flight-tag mono-font">QR 578 (DOH)</span>
-              <span class="status-indicator-tag amber">First Bag in 6m</span>
-            </div>
-          </div>
-
-          <div class="card-feature-list">
-            <div class="feature-item">
-              <svg viewBox="0 0 24 24" class="check-icon" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-              <span><strong>Indian Customs Clearance:</strong> Green Channel for duty-free goods (2L alcohol, 100 cigarettes)</span>
-            </div>
-            <div class="feature-item">
-              <svg viewBox="0 0 24 24" class="check-icon" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-              <span><strong>Oversized Luggage Counters:</strong> Belt 1 & 14 (Musical instruments, golf kits, surfboards)</span>
-            </div>
-            <div class="feature-item">
-              <svg viewBox="0 0 24 24" class="check-icon" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-              <span><strong>24/7 Lost & Found Office:</strong> Terminal 3, Visitors Area near Gate 1</span>
-            </div>
-          </div>
-
-          <div class="card-footer-action">
-            <span class="walking-time">
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              3 min from Immigration Desks
-            </span>
-            <span class="card-link-btn">Ground Floor Map &rarr;</span>
-          </div>
-        </article>
-
-        <!-- CARD 2: VIP & Airline Lounges -->
-        <article class="guide-card" id="card-lounges">
-          <div class="card-hero-icon icon-lounges">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/><path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg>
-          </div>
-          <div class="card-badge">LEVEL 3 & 4 • AIRSIDE (POST-SECURITY)</div>
-          <h3 class="card-title">Encalm Privé & Luxury Airport Lounges</h3>
-          <p class="card-desc">
-            India's largest flagship lounge suites featuring live gourmet chaat counters, authentic Indian & international buffet, private shower suites, and spa pods.
-          </p>
-
-          <div class="lounge-directory-list">
-            <div class="lounge-box">
-              <div class="lounge-header">
-                <strong>Encalm Privé Flagship (T3 International)</strong>
-                <span class="lounge-loc">Near Gate 15 (Level 3)</span>
-              </div>
-              <p class="lounge-detail">30,000 sq ft world-class lounge, bar, live cooking stations, resting pods, and cigar lounge.</p>
-            </div>
-            <div class="lounge-box">
-              <div class="lounge-header">
-                <strong>Air India Maharaja Lounge (T3)</strong>
-                <span class="lounge-loc">Mezzanine Level (Gates 27–42)</span>
-              </div>
-              <p class="lounge-detail">Exclusively for Business/First Class & Star Alliance Gold. Fine dining and showers.</p>
-            </div>
-            <div class="lounge-box">
-              <div class="lounge-header">
-                <strong>American Express Centurion Lounge (T3)</strong>
-                <span class="lounge-loc">Adjacent to Gate 28</span>
-              </div>
-              <p class="lounge-detail">Curated dining, premium cocktails, and high-speed executive workstations.</p>
-            </div>
-          </div>
-
-          <div class="card-footer-action">
-            <span class="walking-time">
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              Escalators past Duty-Free Central
-            </span>
-            <span class="card-link-btn">Access Rules & Cards &rarr;</span>
-          </div>
-        </article>
-
-        <!-- CARD 3: Currency Exchange & Banking / UPI -->
-        <article class="guide-card" id="card-currency">
-          <div class="card-hero-icon icon-currency">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><line x1="12" x2="12" y1="6" y2="18"/></svg>
-          </div>
-          <div class="card-badge">TERMINAL 3 & T1 • ARRIVALS / DEPARTURES</div>
-          <h3 class="card-title">Forex, UPI One World & Indian Bank ATMs</h3>
-          <p class="card-desc">
-            Authorized RBI foreign exchange counters, instant international UPI wallet setup (UPI One World for tourists), and 24/7 national bank ATMs.
-          </p>
-
-          <div class="rate-ticker-box">
-            <div class="rate-title">LIVE FOREX BENCHMARK RATES (INR / CURRENCY)</div>
-            <div class="rate-grid">
-              <div class="rate-pill">
-                <span class="currency-code">USD / INR</span>
-                <span class="rate-val mono-font">₹83.85</span>
-              </div>
-              <div class="rate-pill">
-                <span class="currency-code">EUR / INR</span>
-                <span class="rate-val mono-font">₹93.20</span>
-              </div>
-              <div class="rate-pill">
-                <span class="currency-code">GBP / INR</span>
-                <span class="rate-val mono-font">₹111.45</span>
-              </div>
-              <div class="rate-pill">
-                <span class="currency-code">AED / INR</span>
-                <span class="rate-val mono-font">₹22.82</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="card-feature-list">
-            <div class="feature-item">
-              <svg viewBox="0 0 24 24" class="check-icon" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-              <span><strong>UPI One World Desk:</strong> Get an instant UPI QR payment wallet for use across India</span>
-            </div>
-            <div class="feature-item">
-              <svg viewBox="0 0 24 24" class="check-icon" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-              <span><strong>Forex Counters:</strong> State Bank of India (SBI), Thomas Cook & Central Bank of India</span>
-            </div>
-            <div class="feature-item">
-              <svg viewBox="0 0 24 24" class="check-icon" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-              <span><strong>ATMs Available:</strong> SBI, Punjab National Bank, ICICI Bank, HDFC Bank (24/7)</span>
-            </div>
-          </div>
-
-          <div class="card-footer-action">
-            <span class="walking-time">
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              T3 Arrivals & Departures Concourse
-            </span>
-            <span class="card-link-btn">UPI Registration &rarr;</span>
-          </div>
-        </article>
-
-        <!-- CARD 4: Ground Transit & Airport Express Metro -->
-        <article class="guide-card" id="card-transit">
-          <div class="card-hero-icon icon-transit">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="16" height="16" x="4" y="3" rx="2"/><path d="M4 11h16"/><path d="M12 3v8"/><path d="m8 19-2 3"/><path d="m18 22-2-3"/><circle cx="8" cy="15" r="1"/><circle cx="16" cy="15" r="1"/></svg>
-          </div>
-          <div class="card-badge">BASEMENT & MULTI-LEVEL PARKING (MLCP)</div>
-          <h3 class="card-title">Delhi Metro Express, Taxis & Inter-Terminal Shuttle</h3>
-          <p class="card-desc">
-            Direct high-speed Airport Metro to Central Delhi, Delhi Police pre-paid taxi booths, dedicated Uber/Ola pick-up zones, and free inter-terminal electric buses.
-          </p>
-
-          <div class="transit-modes-list">
-            <div class="transit-row">
-              <div class="transit-badge badge-metro">DELHI AIRPORT METRO EXPRESS</div>
-              <div class="transit-info">
-                <strong>Platform B1 (T3)</strong> • To New Delhi Railway Station & Connaught Place in <strong>19 mins</strong>. Every 10 mins.
-              </div>
-            </div>
-            <div class="transit-row">
-              <div class="transit-badge badge-taxi">DELHI POLICE PREPAID TAXI</div>
-              <div class="transit-info">
-                <strong>Pillar 14 Arrivals Forecourt</strong> • Fixed government-regulated tariffs with zero surge pricing.
-              </div>
-            </div>
-            <div class="transit-row">
-              <div class="transit-badge badge-uber">UBER & OLA DEDICATED PICKUP</div>
-              <div class="transit-info">
-                <strong>MLCP Multi-Level Parking Level 2</strong> • Designated ride-hailing lanes with pin-based dispatch.
-              </div>
-            </div>
-            <div class="transit-row">
-              <div class="transit-badge badge-shuttle">FREE INTER-TERMINAL BUS</div>
-              <div class="transit-info">
-                <strong>Bus Stand Pillar 10</strong> • Complimentary T3 ⇄ T2 ⇄ T1 circular electric bus (every 10m).
-              </div>
-            </div>
-          </div>
-
-          <div class="card-footer-action">
-            <span class="walking-time">
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              Follow Orange Metro Floor Signs
-            </span>
-            <span class="card-link-btn">Metro SmartCard & Schedule &rarr;</span>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- ======================================================== -->
-    <!-- SECTION 4: BAGGAGE POLICY SECTION (DGCA & BCAS STANDARDS)-->
-    <!-- ======================================================== -->
-    <section class="section-container" id="baggage-policy">
-      <!-- Metric / Imperial Toggle (Pure CSS interactive radio) -->
-      <input type="radio" name="unit-switch" id="unit-metric" class="unit-radio" checked>
-      <input type="radio" name="unit-switch" id="unit-imperial" class="unit-radio">
-
-      <div class="section-header-row">
-        <div>
-          <div class="section-kicker">CIVIL AVIATION DIRECTIVES // DGCA & BCAS STANDARDS</div>
-          <h2 class="section-title">Indian & International Baggage Allowances</h2>
-          <p class="section-lead">
-            Official guidelines for cabin hand luggage and check-in hold baggage across domestic airlines (IndiGo, Air India, Akasa, SpiceJet) and international carriers.
-          </p>
-        </div>
-
-        <div class="unit-toggle-group" title="Switch Measurement Units">
-          <span class="unit-label-txt">UNITS:</span>
-          <div class="unit-toggle-pill">
-            <label for="unit-metric" class="unit-btn metric-btn">Metric (cm / kg)</label>
-            <label for="unit-imperial" class="unit-btn imperial-btn">Imperial (in / lbs)</label>
-          </div>
-        </div>
-      </div>
-
-      <!-- Two-Column Baggage Layout -->
-      <div class="baggage-comparison-grid">
-        <!-- ================= COLUMN 1: CARRY-ON BAGGAGE ================= -->
-        <article class="baggage-card carryon-card">
-          <div class="baggage-card-header">
-            <div class="baggage-badge badge-carryon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 20h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2Z"/><path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><circle cx="8" cy="20" r="1.5"/><circle cx="16" cy="20" r="1.5"/></svg>
-              <span>CABIN HAND LUGGAGE (DGCA COMPLIANCE)</span>
-            </div>
-            <h3 class="baggage-type-title">Cabin Baggage (1 Piece + 1 Personal Item)</h3>
-            <p class="baggage-subhead">
-              Allowed inside the aircraft passenger cabin. Must strictly fit into overhead bins or underneath the seat in front.
-            </p>
-          </div>
-
-          <!-- Dimension Blueprint Diagram (SVG) -->
-          <div class="dimension-diagram-box">
-            <div class="blueprint-tag">DGCA SIZER BLUEPRINT // 55 × 35 × 25 CM</div>
-            
-            <svg class="blueprint-svg" viewBox="0 0 460 260" preserveAspectRatio="xMidYMid meet" aria-label="Indian Cabin hand baggage blueprint diagram">
-              <defs>
-                <pattern id="grid-carry" width="20" height="20" patternUnits="userSpaceOnUse">
-                  <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(2, 132, 199, 0.12)" stroke-width="1"/>
-                </pattern>
-                <linearGradient id="suitcase-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#ffffff"/>
-                  <stop offset="100%" stop-color="#e0f2fe"/>
-                </linearGradient>
-              </defs>
-
-              <rect width="100%" height="100%" fill="url(#grid-carry)"/>
-
-              <!-- Telescopic Handle -->
-              <path d="M 125 50 L 125 15 L 175 15 L 175 50" fill="none" stroke="#0284c7" stroke-width="3" stroke-linecap="round"/>
-              <rect x="118" y="10" width="64" height="8" rx="3" fill="#0369a1" stroke="#0284c7" stroke-width="1.5"/>
-
-              <!-- Main Suitcase Body (Carry-on) -->
-              <rect x="80" y="50" width="140" height="175" rx="16" fill="url(#suitcase-grad)" stroke="#0284c7" stroke-width="2.5"/>
-              
-              <!-- Front Zip Pocket & Accents -->
-              <rect x="95" y="70" width="110" height="135" rx="8" fill="rgba(2, 132, 199, 0.05)" stroke="rgba(2, 132, 199, 0.35)" stroke-width="1.5" stroke-dasharray="4 2"/>
-              <line x1="110" y1="110" x2="190" y2="110" stroke="rgba(2, 132, 199, 0.45)" stroke-width="2"/>
-              <line x1="110" y1="140" x2="190" y2="140" stroke="rgba(2, 132, 199, 0.45)" stroke-width="2"/>
-              <line x1="110" y1="170" x2="190" y2="170" stroke="rgba(2, 132, 199, 0.45)" stroke-width="2"/>
-
-              <!-- Corner Bumpers -->
-              <path d="M 80 66 A 16 16 0 0 1 96 50" fill="none" stroke="#0369a1" stroke-width="4.5"/>
-              <path d="M 204 50 A 16 16 0 0 1 220 66" fill="none" stroke="#0369a1" stroke-width="4.5"/>
-
-              <!-- Wheels -->
-              <circle cx="105" cy="232" r="7" fill="#0369a1" stroke="#0284c7" stroke-width="2"/>
-              <circle cx="195" cy="232" r="7" fill="#0369a1" stroke="#0284c7" stroke-width="2"/>
-
-              <!-- Personal Item / Laptop Backpack -->
-              <rect x="250" y="95" width="85" height="130" rx="12" fill="#f8fafc" stroke="#0ea5e9" stroke-width="2"/>
-              <path d="M 265 95 Q 292 75 320 95" fill="none" stroke="#0ea5e9" stroke-width="2.5"/>
-              <rect x="260" y="125" width="65" height="85" rx="6" fill="rgba(14, 165, 233, 0.08)" stroke="rgba(14, 165, 233, 0.4)" stroke-width="1.5"/>
-              <text x="292" y="170" text-anchor="middle" fill="#0369a1" font-family="'Outfit', sans-serif" font-size="10" font-weight="700">LAPTOP / TOTE</text>
-
-              <!-- Dimension Callout Lines & Arrows -->
-              <!-- Height Arrow (55 cm) -->
-              <line x1="50" y1="10" x2="50" y2="239" stroke="#d97706" stroke-width="1.8"/>
-              <line x1="42" y1="10" x2="58" y2="10" stroke="#d97706" stroke-width="1.8"/>
-              <line x1="42" y1="239" x2="58" y2="239" stroke="#d97706" stroke-width="1.8"/>
-              <polygon points="50,10 46,20 54,20" fill="#d97706"/>
-              <polygon points="50,239 46,229 54,229" fill="#d97706"/>
-
-              <!-- Height Dimension Text -->
-              <g class="dim-metric">
-                <text x="35" y="125" text-anchor="end" fill="#b45309" font-family="'Chivo Mono', monospace" font-size="13" font-weight="700">55 cm</text>
-                <text x="35" y="140" text-anchor="end" fill="#475569" font-family="'Outfit', sans-serif" font-size="10">MAX HEIGHT</text>
-              </g>
-              <g class="dim-imperial">
-                <text x="35" y="125" text-anchor="end" fill="#b45309" font-family="'Chivo Mono', monospace" font-size="13" font-weight="700">21.6 in</text>
-                <text x="35" y="140" text-anchor="end" fill="#475569" font-family="'Outfit', sans-serif" font-size="10">MAX HEIGHT</text>
-              </g>
-
-              <!-- Width Arrow (35 cm standard India) -->
-              <line x1="80" y1="250" x2="220" y2="250" stroke="#d97706" stroke-width="1.8"/>
-              <line x1="80" y1="242" x2="80" y2="258" stroke="#d97706" stroke-width="1.8"/>
-              <line x1="220" y1="242" x2="220" y2="258" stroke="#d97706" stroke-width="1.8"/>
-              <polygon points="80,250 90,246 90,254" fill="#d97706"/>
-              <polygon points="220,250 210,246 210,254" fill="#d97706"/>
-
-              <!-- Width Dimension Text -->
-              <g class="dim-metric">
-                <text x="150" y="246" text-anchor="middle" fill="#b45309" font-family="'Chivo Mono', monospace" font-size="12" font-weight="700">35 cm (W)</text>
-              </g>
-              <g class="dim-imperial">
-                <text x="150" y="246" text-anchor="middle" fill="#b45309" font-family="'Chivo Mono', monospace" font-size="12" font-weight="700">13.8 in (W)</text>
-              </g>
-
-              <!-- Depth Badge / Callout -->
-              <rect x="360" y="60" width="85" height="42" rx="6" fill="#ffffff" stroke="#0284c7" stroke-width="1.5"/>
-              <text x="402" y="77" text-anchor="middle" fill="#64748b" font-family="'Outfit', sans-serif" font-size="9">MAX DEPTH</text>
-              <g class="dim-metric">
-                <text x="402" y="93" text-anchor="middle" fill="#0369a1" font-family="'Chivo Mono', monospace" font-size="12" font-weight="700">25 cm</text>
-              </g>
-              <g class="dim-imperial">
-                <text x="402" y="93" text-anchor="middle" fill="#0369a1" font-family="'Chivo Mono', monospace" font-size="12" font-weight="700">9.8 in</text>
-              </g>
-
-              <!-- Personal Item Dim -->
-              <rect x="360" y="115" width="85" height="42" rx="6" fill="#ffffff" stroke="#0ea5e9" stroke-width="1.5"/>
-              <text x="402" y="132" text-anchor="middle" fill="#64748b" font-family="'Outfit', sans-serif" font-size="9">UNDER SEAT</text>
-              <g class="dim-metric">
-                <text x="402" y="148" text-anchor="middle" fill="#0284c7" font-family="'Chivo Mono', monospace" font-size="12" font-weight="700">40×30×15 cm</text>
-              </g>
-              <g class="dim-imperial">
-                <text x="402" y="148" text-anchor="middle" fill="#0284c7" font-family="'Chivo Mono', monospace" font-size="12" font-weight="700">15.7×12×6 in</text>
-              </g>
-            </svg>
-          </div>
-
-          <!-- Weight Gauge & Clearances -->
-          <div class="baggage-metrics-row">
-            <div class="metric-block">
-              <span class="metric-label">DOMESTIC ECONOMY LIMIT</span>
-              <div class="metric-number-wrap">
-                <span class="dim-metric mono-font val-highlight">7.0 kg</span>
-                <span class="dim-imperial mono-font val-highlight">15.4 lbs</span>
-              </div>
-              <span class="metric-note">IndiGo, Akasa, Air India & SpiceJet standard</span>
-            </div>
-
-            <div class="metric-block">
-              <span class="metric-label">PIECES PERMITTED</span>
-              <div class="metric-number-wrap">
-                <span class="mono-font val-highlight">1 + 1</span>
-              </div>
-              <span class="metric-note">1 Roller Bag + 1 Laptop Bag or Ladies Handbag (Max 3 kg)</span>
-            </div>
-          </div>
-
-          <!-- Compliance Rules List -->
-          <div class="policy-rules-box">
-            <h4 class="rules-heading">BCAS India Security Regulations</h4>
-            <ul class="rules-list">
-              <li>
-                <span class="rule-icon ok-icon">✓</span>
-                <div>
-                  <strong>Power Banks Mandatory in Cabin:</strong> BCAS mandates all power banks & portable batteries (up to 160Wh) must remain with the passenger. <em>Never put in check-in!</em>
-                </div>
-              </li>
-              <li>
-                <span class="rule-icon ok-icon">✓</span>
-                <div>
-                  <strong>DigiYatra Fast-Track Bag Drop:</strong> Self-bag drop counters (SBD) available at Delhi T3 & T1 for tagged cabin and checked bags.
-                </div>
-              </li>
-              <li>
-                <span class="rule-icon ok-icon">✓</span>
-                <div>
-                  <strong>Liquids Rule:</strong> Transparent pouch with containers &le;100ml. Ayurvedic medicines & baby food exempt with prior declaration.
-                </div>
-              </li>
-              <li>
-                <span class="rule-icon no-icon">✕</span>
-                <div>
-                  <strong>Strictly Banned Items:</strong> E-cigarettes, matchboxes/lighters, dry coconuts (copra - fire hazard), and sharp scissors in cabin baggage.
-                </div>
-              </li>
-            </ul>
-          </div>
-        </article>
-
-        <!-- ================= COLUMN 2: CHECK-IN BAGGAGE ================= -->
-        <article class="baggage-card checkin-card">
-          <div class="baggage-card-header">
-            <div class="baggage-badge badge-checkin">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8v13H3V8"/><path d="M1 3h22v5H1z"/><path d="M10 12h4"/></svg>
-              <span>CHECK-IN HOLD BAGGAGE (DOMESTIC & INTERNATIONAL)</span>
-            </div>
-            <h3 class="baggage-type-title">Checked Hold Luggage (Conveyor Sorters)</h3>
-            <p class="baggage-subhead">
-              Handed in at airline check-in counters or self-bag drop (SBD) machines. Transferred into aircraft pressurized cargo hold.
-            </p>
-          </div>
-
-          <!-- Dimension Blueprint Diagram (SVG) -->
-          <div class="dimension-diagram-box">
-            <div class="blueprint-tag">HOLD BAGGAGE BLUEPRINT // L+W+H &le; 158 CM</div>
-
-            <svg class="blueprint-svg" viewBox="0 0 460 260" preserveAspectRatio="xMidYMid meet" aria-label="Checked hold luggage dimensions blueprint diagram">
-              <defs>
-                <pattern id="grid-check" width="20" height="20" patternUnits="userSpaceOnUse">
-                  <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(5, 150, 105, 0.12)" stroke-width="1"/>
-                </pattern>
-                <linearGradient id="checkin-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#ffffff"/>
-                  <stop offset="100%" stop-color="#ecfdf5"/>
-                </linearGradient>
-              </defs>
-
-              <rect width="100%" height="100%" fill="url(#grid-check)"/>
-
-              <!-- Telescopic Handle (Recessed) -->
-              <rect x="180" y="24" width="70" height="12" rx="4" fill="#059669" stroke="#047857" stroke-width="1.5"/>
-
-              <!-- Large Hard-shell Suitcase Body -->
-              <rect x="120" y="36" width="190" height="185" rx="20" fill="url(#checkin-grad)" stroke="#059669" stroke-width="2.5"/>
-
-              <!-- Heavy Duty Molded Ribs -->
-              <line x1="140" y1="80" x2="290" y2="80" stroke="rgba(5, 150, 105, 0.35)" stroke-width="3" stroke-linecap="round"/>
-              <line x1="140" y1="110" x2="290" y2="110" stroke="rgba(5, 150, 105, 0.35)" stroke-width="3" stroke-linecap="round"/>
-              <line x1="140" y1="140" x2="290" y2="140" stroke="rgba(5, 150, 105, 0.35)" stroke-width="3" stroke-linecap="round"/>
-              <line x1="140" y1="170" x2="290" y2="170" stroke="rgba(5, 150, 105, 0.35)" stroke-width="3" stroke-linecap="round"/>
-
-              <!-- Delhi Bag Tag -->
-              <rect x="135" y="44" width="24" height="36" rx="3" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
-              <line x1="147" y1="36" x2="147" y2="44" stroke="#d97706" stroke-width="1.8"/>
-              <text x="147" y="66" text-anchor="middle" fill="#92400e" font-family="'Chivo Mono', monospace" font-size="8.5" font-weight="700">DEL</text>
-
-              <!-- TSA Combination Lock -->
-              <rect x="300" y="110" width="12" height="28" rx="2" fill="#047857" stroke="#059669" stroke-width="1"/>
-              <circle cx="306" cy="118" r="2" fill="#ef4444"/>
-
-              <!-- Reinforced Dual Wheels -->
-              <circle cx="155" cy="226" r="9" fill="#065f46" stroke="#059669" stroke-width="2.5"/>
-              <circle cx="275" cy="226" r="9" fill="#065f46" stroke="#059669" stroke-width="2.5"/>
-
-              <!-- Dimension Callout Lines & Arrows -->
-              <!-- Height Arrow (75 cm) -->
-              <line x1="85" y1="24" x2="85" y2="235" stroke="#059669" stroke-width="1.8"/>
-              <line x1="77" y1="24" x2="93" y2="24" stroke="#059669" stroke-width="1.8"/>
-              <line x1="77" y1="235" x2="93" y2="235" stroke="#059669" stroke-width="1.8"/>
-              <polygon points="85,24 81,34 89,34" fill="#059669"/>
-              <polygon points="85,235 81,225 89,225" fill="#059669"/>
-
-              <!-- Height Callout Text -->
-              <g class="dim-metric">
-                <text x="70" y="125" text-anchor="end" fill="#065f46" font-family="'Chivo Mono', monospace" font-size="13" font-weight="700">75 cm</text>
-                <text x="70" y="140" text-anchor="end" fill="#475569" font-family="'Outfit', sans-serif" font-size="10">STANDARD HEIGHT</text>
-              </g>
-              <g class="dim-imperial">
-                <text x="70" y="125" text-anchor="end" fill="#065f46" font-family="'Chivo Mono', monospace" font-size="13" font-weight="700">29.5 in</text>
-                <text x="70" y="140" text-anchor="end" fill="#475569" font-family="'Outfit', sans-serif" font-size="10">STANDARD HEIGHT</text>
-              </g>
-
-              <!-- Width Arrow (52 cm) -->
-              <line x1="120" y1="248" x2="310" y2="248" stroke="#059669" stroke-width="1.8"/>
-              <line x1="120" y1="240" x2="120" y2="256" stroke="#059669" stroke-width="1.8"/>
-              <line x1="310" y1="240" x2="310" y2="256" stroke="#059669" stroke-width="1.8"/>
-              <polygon points="120,248 130,244 130,252" fill="#059669"/>
-              <polygon points="310,248 300,244 300,252" fill="#059669"/>
-
-              <!-- Width Callout Text -->
-              <g class="dim-metric">
-                <text x="215" y="244" text-anchor="middle" fill="#065f46" font-family="'Chivo Mono', monospace" font-size="12" font-weight="700">52 cm (W)</text>
-              </g>
-              <g class="dim-imperial">
-                <text x="215" y="244" text-anchor="middle" fill="#065f46" font-family="'Chivo Mono', monospace" font-size="12" font-weight="700">20.5 in (W)</text>
-              </g>
-
-              <!-- Linear Dimension Formula Badge -->
-              <rect x="330" y="55" width="118" height="68" rx="8" fill="#ffffff" stroke="#059669" stroke-width="1.5"/>
-              <text x="389" y="73" text-anchor="middle" fill="#065f46" font-family="'Outfit', sans-serif" font-size="10" font-weight="700">IATA TOTAL LINEAR</text>
-              <g class="dim-metric">
-                <text x="389" y="93" text-anchor="middle" fill="#047857" font-family="'Chivo Mono', monospace" font-size="13" font-weight="800">L+W+H &le; 158cm</text>
-                <text x="389" y="110" text-anchor="middle" fill="#64748b" font-family="'Outfit', sans-serif" font-size="9">(75 + 52 + 31 cm)</text>
-              </g>
-              <g class="dim-imperial">
-                <text x="389" y="93" text-anchor="middle" fill="#047857" font-family="'Chivo Mono', monospace" font-size="13" font-weight="800">L+W+H &le; 62.0in</text>
-                <text x="389" y="110" text-anchor="middle" fill="#64748b" font-family="'Outfit', sans-serif" font-size="9">(29.5 + 20.5 + 12 in)</text>
-              </g>
-
-              <!-- Depth Callout -->
-              <rect x="330" y="135" width="118" height="42" rx="6" fill="#ffffff" stroke="#059669" stroke-width="1.5"/>
-              <text x="389" y="152" text-anchor="middle" fill="#64748b" font-family="'Outfit', sans-serif" font-size="9">MAX CASE DEPTH</text>
-              <g class="dim-metric">
-                <text x="389" y="168" text-anchor="middle" fill="#047857" font-family="'Chivo Mono', monospace" font-size="12" font-weight="700">31 cm (12.2 in)</text>
-              </g>
-              <g class="dim-imperial">
-                <text x="389" y="168" text-anchor="middle" fill="#047857" font-family="'Chivo Mono', monospace" font-size="12" font-weight="700">12.2 in (31 cm)</text>
-              </g>
-            </svg>
-          </div>
-
-          <!-- Weight Allowances Tier Table -->
-          <div class="baggage-metrics-row">
-            <div class="metric-block">
-              <span class="metric-label">DOMESTIC CHECK-IN LIMIT</span>
-              <div class="metric-number-wrap">
-                <span class="dim-metric mono-font val-highlight">15.0 kg</span>
-                <span class="dim-imperial mono-font val-highlight">33.0 lbs</span>
-              </div>
-              <span class="metric-note">1 Piece standard (Air India allows 20 kg to 25 kg)</span>
-            </div>
-
-            <div class="metric-block">
-              <span class="metric-label">INTERNATIONAL / BUSINESS</span>
-              <div class="metric-number-wrap">
-                <span class="dim-metric mono-font val-highlight">23 kg / 32 kg</span>
-                <span class="dim-imperial mono-font val-highlight">50 lbs / 70 lbs</span>
-              </div>
-              <span class="metric-note">2 Pieces for US/UK/EU routes or Business Class</span>
-            </div>
-          </div>
-
-          <!-- Checked Compliance Directives -->
-          <div class="policy-rules-box">
-            <h4 class="rules-heading">Indian Airport Authority Directives</h4>
-            <ul class="rules-list">
-              <li>
-                <span class="rule-icon ok-icon">✓</span>
-                <div>
-                  <strong>Excess Baggage Pre-booking:</strong> Airlines in India (IndiGo, Akasa, Air India) offer discounted slabs if booked online &gt;2 hours before departure.
-                </div>
-              </li>
-              <li>
-                <span class="rule-icon ok-icon">✓</span>
-                <div>
-                  <strong>Sports Gear & Spiritual Items:</strong> Cricket kit bags, harmoniums, and sitars allowed in checked baggage with special fragile tag handling.
-                </div>
-              </li>
-              <li>
-                <span class="rule-icon ok-icon">✓</span>
-                <div>
-                  <strong>Identification Labels:</strong> Ensure full name, PNR, phone number, and destination address are written on baggage tags at check-in.
-                </div>
-              </li>
-              <li>
-                <span class="rule-icon no-icon">✕</span>
-                <div>
-                  <strong>BCAS Prohibited in Cargo:</strong> Loose spare lithium cells, electronic vaporizers, fireworks/crackers, and loose ghee/oils without leakproof tins.
-                </div>
-              </li>
-            </ul>
-          </div>
-        </article>
-      </div>
-
-      <!-- Quick Comparison Summary Table -->
-      <div class="summary-comparison-wrap">
-        <h4 class="summary-title">Indian Airlines Allowance Matrix Comparison</h4>
-        <div class="table-scroll-wrapper">
-          <table class="summary-matrix-table">
+        <div class="table-responsive-wrapper">
+          <table class="responsive-table" aria-label="Hospital Comparison Matrix">
             <thead>
               <tr>
-                <th scope="col">Airline / Tier</th>
-                <th scope="col">Cabin Baggage (Free)</th>
-                <th scope="col">Domestic Checked</th>
-                <th scope="col">International Checked</th>
-                <th scope="col">Excess Bag Fee (Dom)</th>
+                <th scope="col">Operational Capability</th>
+                <th scope="col">Conventional Hospital</th>
+                <th scope="col">Medix Care Smart Hospital</th>
+                <th scope="col">Patient Advantage</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td class="feature-col">IndiGo (6E)</td>
-                <td><span class="dim-metric">7 kg (55×35×25 cm)</span><span class="dim-imperial">15.4 lbs</span></td>
-                <td><span class="dim-metric">15 kg (1 Piece)</span><span class="dim-imperial">33 lbs</span></td>
-                <td><span class="dim-metric">20 kg – 30 kg</span><span class="dim-imperial">44 – 66 lbs</span></td>
-                <td>₹550 / kg at airport counter</td>
+                <td>
+                  <span class="table-feature-title">Emergency Trauma Triage</span>
+                  <span class="table-feature-sub">Arrival to doctor response</span>
+                </td>
+                <td>20 to 35 minutes manual paperwork</td>
+                <td>
+                  <span class="status-badge">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                    Under 4 minutes biometric triage
+                  </span>
+                </td>
+                <td>Rapid golden-hour intervention</td>
               </tr>
               <tr>
-                <td class="feature-col">Air India (AI)</td>
-                <td><span class="dim-metric">7 kg (Econ) / 10 kg (Biz)</span><span class="dim-imperial">15.4 / 22 lbs</span></td>
-                <td><span class="dim-metric">20 kg – 25 kg</span><span class="dim-imperial">44 – 55 lbs</span></td>
-                <td><span class="dim-metric">2 × 23 kg (US/UK)</span><span class="dim-imperial">2 × 50 lbs</span></td>
-                <td>₹500 / kg at airport counter</td>
+                <td>
+                  <span class="table-feature-title">ICU Bed Tracking</span>
+                  <span class="table-feature-sub">Ward allocation accuracy</span>
+                </td>
+                <td>Manual phone calls between wards</td>
+                <td>
+                  <span class="status-badge">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                    Automated real-time sensor matrix
+                  </span>
+                </td>
+                <td>Zero delayed admissions for critical cases</td>
               </tr>
               <tr>
-                <td class="feature-col">Akasa Air (QP)</td>
-                <td><span class="dim-metric">7 kg (1 Piece)</span><span class="dim-imperial">15.4 lbs</span></td>
-                <td><span class="dim-metric">15 kg (1 Piece)</span><span class="dim-imperial">33 lbs</span></td>
-                <td><span class="dim-metric">20 kg – 30 kg</span><span class="dim-imperial">44 – 66 lbs</span></td>
-                <td>₹550 / kg at airport counter</td>
+                <td>
+                  <span class="table-feature-title">Prescription Safety Checks</span>
+                  <span class="table-feature-sub">EHR drug interaction alerts</span>
+                </td>
+                <td>Manual doctor chart reviews</td>
+                <td>
+                  <span class="status-badge">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                    AI allergy &amp; drug cross-check
+                  </span>
+                </td>
+                <td>100% elimination of medication errors</td>
               </tr>
               <tr>
-                <td class="feature-col">Vistara (UK)</td>
-                <td><span class="dim-metric">7 kg (Econ) / 10 kg (Prem)</span><span class="dim-imperial">15.4 / 22 lbs</span></td>
-                <td><span class="dim-metric">15 kg – 20 kg</span><span class="dim-imperial">33 – 44 lbs</span></td>
-                <td><span class="dim-metric">30 kg – 40 kg</span><span class="dim-imperial">66 – 88 lbs</span></td>
-                <td>₹550 / kg at airport counter</td>
-              </tr>
-              <tr>
-                <td class="feature-col">SpiceJet (SG)</td>
-                <td><span class="dim-metric">7 kg (1 Piece)</span><span class="dim-imperial">15.4 lbs</span></td>
-                <td><span class="dim-metric">15 kg (1 Piece)</span><span class="dim-imperial">33 lbs</span></td>
-                <td><span class="dim-metric">20 kg – 30 kg</span><span class="dim-imperial">44 – 66 lbs</span></td>
-                <td>₹550 / kg at airport counter</td>
+                <td>
+                  <span class="table-feature-title">Cashless Insurance Approval</span>
+                  <span class="table-feature-sub">TPA desk clearance time</span>
+                </td>
+                <td>4 to 8 hours waiting at discharge</td>
+                <td>
+                  <span class="status-badge">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                    Paperless pre-approval in 25 mins
+                  </span>
+                </td>
+                <td>Stress-free discharge experience</td>
               </tr>
             </tbody>
           </table>
         </div>
+
       </div>
     </section>
+
+    <!-- Top Specialist Doctors Cards -->
+    <section class="section-spacer" id="doctors" aria-labelledby="doctors-title">
+      <div class="container">
+        
+        <div class="section-header">
+          <div class="badge-tag">
+            <span class="badge-dot"></span>
+            <span>CLINICAL LEADERSHIP</span>
+          </div>
+          <h2 class="section-title" id="doctors-title">Our Super-Specialist Faculty</h2>
+          <p class="section-desc">Internationally certified clinicians, surgeons, and researchers dedicated to personalized healing.</p>
+        </div>
+
+        <div class="doctors-grid">
+          
+          <div class="doctor-card">
+            <div class="doctor-card-top">
+              <div class="doctor-avatar">AS</div>
+              <div>
+                <h3 class="doctor-name">Dr. Arvind Sharma</h3>
+                <span class="doctor-dept">Chief of Cardiology</span>
+                <span class="doctor-exp">MD, DM (AIIMS), FACC (USA) &bull; 24 Yrs Exp</span>
+              </div>
+            </div>
+            <p style="font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.6;">
+              Pioneered transcatheter aortic valve replacement (TAVR) with over 8,000 successful coronary interventions.
+            </p>
+            <div class="doctor-badge-strip">
+              <span style="color: var(--med-emerald); font-weight: 600;">Mon - Fri &bull; 10 AM - 4 PM</span>
+              <a href="#booking" class="btn btn-secondary btn-sm">Book Consult</a>
+            </div>
+          </div>
+
+          <div class="doctor-card">
+            <div class="doctor-card-top">
+              <div class="doctor-avatar" style="background: linear-gradient(135deg, #0ea5e9, #6366f1);">PN</div>
+              <div>
+                <h3 class="doctor-name">Dr. Priya Nair</h3>
+                <span class="doctor-dept">Director of Neurosciences</span>
+                <span class="doctor-exp">MCh Neurosurgery, FRCS (London) &bull; 19 Yrs Exp</span>
+              </div>
+            </div>
+            <p style="font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.6;">
+              Specializes in awake craniotomy, complex cerebral aneurysm clipping, and endoscopic skull base surgery.
+            </p>
+            <div class="doctor-badge-strip">
+              <span style="color: var(--med-emerald); font-weight: 600;">Tue - Sat &bull; 11 AM - 5 PM</span>
+              <a href="#booking" class="btn btn-secondary btn-sm">Book Consult</a>
+            </div>
+          </div>
+
+          <div class="doctor-card">
+            <div class="doctor-card-top">
+              <div class="doctor-avatar" style="background: linear-gradient(135deg, #10b981, #06b6d4);">VS</div>
+              <div>
+                <h3 class="doctor-name">Dr. Vikram Singhania</h3>
+                <span class="doctor-dept">Head of Orthopedics</span>
+                <span class="doctor-exp">MS Ortho, MCh (Dundee, UK) &bull; 21 Yrs Exp</span>
+              </div>
+            </div>
+            <p style="font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.6;">
+              Robotic joint reconstruction pioneer having completed over 4,500 minimally invasive knee and hip surgeries.
+            </p>
+            <div class="doctor-badge-strip">
+              <span style="color: var(--med-emerald); font-weight: 600;">Mon - Sat &bull; 09 AM - 2 PM</span>
+              <a href="#booking" class="btn btn-secondary btn-sm">Book Consult</a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FAQ Accordion -->
+    <section class="section-spacer" id="faq" aria-labelledby="faq-title">
+      <div class="container">
+        
+        <div class="section-header">
+          <div class="badge-tag">
+            <span class="badge-dot"></span>
+            <span>PATIENT GUIDELINES</span>
+          </div>
+          <h2 class="section-title" id="faq-title">Frequently Asked Questions</h2>
+          <p class="section-desc">Key information regarding admission protocols, cashless insurance empanelment, and visitor regulations.</p>
+        </div>
+
+        <div class="faq-accordion-group" id="faq-accordion">
+          
+          <div class="faq-item is-open">
+            <button class="faq-trigger" aria-expanded="true">
+              <span>Which health insurance policies and TPA networks are empaneled for cashless treatment?</span>
+              <svg class="faq-icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-content">
+              Medix Care is empaneled with all major public and private health insurers (including Star Health, HDFC ERGO, Care, ICICI Lombard, Max Bupa, and Government CGHS/ECHS schemes). Our 24x7 Cashless Helpdesk handles e-authorizations within 25 minutes of emergency or planned admission.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-trigger" aria-expanded="false">
+              <span>How does the emergency admission and ambulance dispatch process work?</span>
+              <svg class="faq-icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-content">
+              Calling 1800-MED-CARE immediately dispatches the nearest GPS-tracked Advanced Cardiac Life Support (ACLS) ambulance equipped with ventilators, defibrillators, and emergency paramedics. Vital signs are streamed live to our ER trauma team while the ambulance is en route.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-trigger" aria-expanded="false">
+              <span>Can I access my diagnostic laboratory and radiology reports online?</span>
+              <svg class="faq-icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-content">
+              Yes. All blood tests, MRI scans, CT reports, and doctor clinical summaries are automatically synchronized to your Medix Patient Portal. You will receive an SMS with a secure password-protected link as soon as results are authorized by the pathologist.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-trigger" aria-expanded="false">
+              <span>What are the hospital visiting hours for ICU and General Inpatient Wards?</span>
+              <svg class="faq-icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-content">
+              For General and Private Rooms, visiting hours are 04:00 PM to 07:00 PM daily (one visitor at a time). For Intensive Care Units (ICU), visiting hours are strictly 05:00 PM to 06:00 PM with mandatory sterile attire provided at the entrance.
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 24x7 Emergency Assistance Banner -->
+    <section class="section-spacer" id="emergency-banner">
+      <div class="container">
+        
+        <div class="emergency-banner-wrapper">
+          <div class="badge-tag" style="margin-bottom: 1.25rem; background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.35); color: #fca5a5;">
+            <span class="badge-dot emergency"></span>
+            <span>ROUND-THE-CLOCK TRAUMA EMERGENCY</span>
+          </div>
+          <h2 class="emergency-title">In Case of Medical Emergency, Call Immediately</h2>
+          <p class="emergency-desc">
+            Our Level-1 Trauma Centre, Advanced Stroke Bay, and 24x7 Blood Bank are on constant standby with senior emergency physicians.
+          </p>
+          <div class="emergency-hotline-pills">
+            <a href="tel:18006332273" class="btn btn-emergency">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <span>Call Emergency: 1800-MED-CARE</span>
+            </a>
+            <a href="#booking" class="btn btn-secondary">
+              <span>Book Non-Emergency OPD Visit</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
   </main>
 
-  <!-- ======================================================== -->
-  <!-- FOOTER & AIRPORT INTELLIGENCE DIRECTORY                 -->
-  <!-- ======================================================== -->
-  <footer class="airport-footer">
-    <div class="footer-container">
-      <div class="footer-col brand-col">
-        <div class="footer-brand">
-          <div class="brand-logo-icon small">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.3c.4-.2.6-.6.5-1.1z"/></svg>
-          </div>
-          <span class="brand-title">AERO<span class="brand-highlight">VUE</span> INDIA</span>
+  <!-- Multi-Column Responsive Footer -->
+  <footer class="footer-main" id="main-footer">
+    <div class="container">
+      
+      <div class="footer-grid">
+        
+        <!-- Brand Column -->
+        <div class="footer-brand-col">
+          <a href="#hero" class="brand-logo" aria-label="Medix Care Home">
+            <div class="brand-mark">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+                <path d="M12 5v6"/>
+                <path d="M9 8h6"/>
+              </svg>
+            </div>
+            <div class="brand-meta">
+              <span class="brand-title">MEDIX<span class="text-gradient">CARE</span></span>
+              <span class="brand-sub">HOSPITAL OS // NABH ACCREDITED</span>
+            </div>
+          </a>
+          <p class="footer-brand-desc">
+            Decode Labs Web Development Internship Project 2: "Responsive Web Layout - The Art of Fluidity". Hospital Management System built with semantic HTML5 and vanilla CSS3.
+          </p>
         </div>
-        <p class="footer-about">
-          AeroVue India Flight Information Network connects Airports Authority of India (AAI), DIAL Delhi Airport operations, DigiYatra biometric corridors, and airline reservation systems across India.
-        </p>
-        <div class="compliance-tags">
-          <span class="tag-pill">DGCA INDIA COMPLIANT</span>
-          <span class="tag-pill">BCAS SECURITY PROTOCOL</span>
-          <span class="tag-pill">DIGIYATRA VERIFIED</span>
+
+        <!-- Col 1: Clinical Services -->
+        <div>
+          <h4 class="footer-col-title">Specialties</h4>
+          <ul class="footer-links-list">
+            <li><a href="#departments" class="footer-link">Cardiology &amp; Cath Lab</a></li>
+            <li><a href="#departments" class="footer-link">Neurology &amp; Stroke Bay</a></li>
+            <li><a href="#departments" class="footer-link">Orthopedic Robotic Surgery</a></li>
+            <li><a href="#departments" class="footer-link">Comprehensive Oncology</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 2: Patient Desk -->
+        <div>
+          <h4 class="footer-col-title">Patient Portal</h4>
+          <ul class="footer-links-list">
+            <li><a href="#booking" class="footer-link">Book Appointment</a></li>
+            <li><a href="#bed-monitor" class="footer-link">Live ICU Bed Matrix</a></li>
+            <li><a href="#comparison" class="footer-link">Cashless TPA Desk</a></li>
+            <li><a href="#faq" class="footer-link">Patient Guidelines &amp; FAQ</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Internship Specs -->
+        <div>
+          <h4 class="footer-col-title">Project 2 Details</h4>
+          <ul class="footer-links-list">
+            <li><span class="footer-link" style="color: var(--text-secondary);">Decode Labs Portal</span></li>
+            <li><span class="footer-link" style="color: var(--text-secondary);">Frontend Internship Track</span></li>
+            <li><span class="footer-link" style="color: var(--text-secondary);">Topic: Hospital Management</span></li>
+            <li><span class="footer-link" style="color: var(--med-blue);">Status: Laptop, Tab &amp; Mobile Ready</span></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Footer Bottom Bar -->
+      <div class="footer-bottom-bar">
+        <div>
+          &copy; 2026 Medix Care Multi-Specialty Hospital &bull; Decode Labs Web Internship Project 2. Built with semantic HTML5 &amp; CSS3.
+        </div>
+        <div class="social-links" aria-label="Hospital Helplines &amp; Portals">
+          <a href="#" class="social-icon-btn" aria-label="Hospital GitHub Repository">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+          </a>
+          <a href="#" class="social-icon-btn" aria-label="LinkedIn Clinical Network">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="#" class="social-icon-btn" aria-label="Hospital Accreditation Status">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>
+          </a>
         </div>
       </div>
 
-      <div class="footer-col">
-        <h4 class="footer-heading">Flight Tracking</h4>
-        <ul class="footer-links">
-          <li><a href="#flight-board">Delhi T3 International Departures</a></li>
-          <li><a href="#flight-board">Delhi T1 & T2 Domestic Arrivals</a></li>
-          <li><a href="#flight-search">Delhi to Mumbai Golden Route</a></li>
-          <li><a href="#flight-board">IndiGo & Air India Fleet Radar</a></li>
-          <li><a href="#flight-board">CAT-III Fog Season Visibility Updates</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4 class="footer-heading">Delhi Airport Services</h4>
-        <ul class="footer-links">
-          <li><a href="#card-baggage">T3 Customs & Baggage Belts 1–14</a></li>
-          <li><a href="#card-lounges">Encalm Privé & Maharaja Lounges</a></li>
-          <li><a href="#card-currency">UPI One World & SBI Forex Desks</a></li>
-          <li><a href="#card-transit">Delhi Metro Airport Express Line</a></li>
-          <li><a href="#card-transit">Delhi Police Pre-Paid Taxi Booths</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4 class="footer-heading">Emergency & Delhi Airport Help</h4>
-        <div class="contact-card">
-          <div class="contact-item">
-            <span class="contact-lbl">DIAL Delhi Airport 24/7 Helpline:</span>
-            <span class="contact-val mono-font">0124-4797300 / 0124-6838410</span>
-          </div>
-          <div class="contact-item">
-            <span class="contact-lbl">Delhi Police Airport Station:</span>
-            <span class="contact-val mono-font text-red">+91 11 2565 2011 / 112</span>
-          </div>
-          <div class="contact-item">
-            <span class="contact-lbl">CISF Airport Security Helpline:</span>
-            <span class="contact-val mono-font text-indigo">1800 180 1818</span>
-          </div>
-          <div class="contact-item">
-            <span class="contact-lbl">Lost & Found Section:</span>
-            <span class="contact-val">T3 Visitors Area (lostfound.dial@gmrgroup.in)</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="footer-bottom-bar">
-      <div class="footer-bottom-inner">
-        <p>&copy; 2026 AEROVUE India. Real-time aviation intelligence for Indira Gandhi International Airport New Delhi (DEL / VIDP).</p>
-        <div class="time-zones-ticker">
-          <span class="tz-item">DEL (IST UTC+5:30): <strong class="mono-font">00:40</strong></span>
-          <span class="tz-item">BOM (IST): <strong class="mono-font">00:40</strong></span>
-          <span class="tz-item">DXB (UTC+4): <strong class="mono-font">23:10</strong></span>
-          <span class="tz-item">LHR (UTC+1): <strong class="mono-font">20:10</strong></span>
-        </div>
-      </div>
     </div>
   </footer>
+
+  <!-- Light client-side script for interactive components -->
+  <script>
+    // 1. Mobile & Tablet Menu Drawer Toggle
+    const mobileToggleBtn = document.getElementById('mobile-menu-toggle');
+    const mobileDrawer = document.getElementById('mobile-drawer-menu');
+    const drawerLinks = document.querySelectorAll('[data-drawer-close]');
+
+    if (mobileToggleBtn && mobileDrawer) {
+      mobileToggleBtn.addEventListener('click', () => {
+        const isOpen = mobileDrawer.classList.contains('is-open');
+        mobileToggleBtn.classList.toggle('is-active', !isOpen);
+        mobileDrawer.classList.toggle('is-open', !isOpen);
+        mobileToggleBtn.setAttribute('aria-expanded', !isOpen);
+      });
+
+      drawerLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          mobileToggleBtn.classList.remove('is-active');
+          mobileDrawer.classList.remove('is-open');
+          mobileToggleBtn.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+
+    // 2. Interactive Live Bed Monitor Data Switcher
+    const wardTabs = document.querySelectorAll('.toolbar-tab-btn');
+    const valTotalBeds = document.getElementById('val-total-beds');
+    const valOccupiedBeds = document.getElementById('val-occupied-beds');
+    const valAvailableBeds = document.getElementById('val-available-beds');
+    const valVentilatorBeds = document.getElementById('val-ventilator-beds');
+    const valOccupancyRate = document.getElementById('val-occupancy-rate');
+    const occupancyProgressBar = document.getElementById('occupancy-progress-bar');
+    const occupancyPercentage = document.getElementById('occupancy-percentage');
+
+    const wardData = {
+      icu: { total: 120, occupied: 102, available: 18, ventilators: '14 Units', rate: 85 },
+      general: { total: 650, occupied: 520, available: 130, ventilators: '35 Units', rate: 80 },
+      ot: { total: 24, occupied: 19, available: 5, ventilators: '24 Units', rate: 79 },
+      er: { total: 80, occupied: 62, available: 18, ventilators: '28 Units', rate: 78 }
+    };
+
+    wardTabs.forEach(btn => {
+      btn.addEventListener('click', () => {
+        wardTabs.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const wardKey = btn.getAttribute('data-ward');
+        const data = wardData[wardKey] || wardData.icu;
+
+        if (valTotalBeds) valTotalBeds.textContent = data.total;
+        if (valOccupiedBeds) valOccupiedBeds.textContent = data.occupied;
+        if (valAvailableBeds) valAvailableBeds.textContent = data.available;
+        if (valVentilatorBeds) valVentilatorBeds.textContent = data.ventilators;
+        if (valOccupancyRate) valOccupancyRate.textContent = `${data.rate}% Occupancy Rate`;
+        if (occupancyPercentage) occupancyPercentage.textContent = `${data.rate}% Capacity`;
+        if (occupancyProgressBar) occupancyProgressBar.style.width = `${data.rate}%`;
+      });
+    });
+
+    // 3. Appointment Form Submission Feedback
+    const appointmentForm = document.getElementById('appointment-form');
+    const bookingConfirmation = document.getElementById('booking-confirmation');
+
+    if (appointmentForm && bookingConfirmation) {
+      appointmentForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        bookingConfirmation.classList.add('is-visible');
+        bookingConfirmation.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      });
+    }
+
+    // 4. FAQ Accordion Interaction
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      const trigger = item.querySelector('.faq-trigger');
+      if (trigger) {
+        trigger.addEventListener('click', () => {
+          const isOpen = item.classList.contains('is-open');
+          faqItems.forEach(otherItem => {
+            if (otherItem !== item) {
+              otherItem.classList.remove('is-open');
+              const otherTrigger = otherItem.querySelector('.faq-trigger');
+              if (otherTrigger) otherTrigger.setAttribute('aria-expanded', 'false');
+            }
+          });
+          item.classList.toggle('is-open', !isOpen);
+          trigger.setAttribute('aria-expanded', !isOpen);
+        });
+      }
+    });
+
+    // 5. Header Active Link Highlight on Scroll
+    window.addEventListener('scroll', () => {
+      const sections = document.querySelectorAll('section[id]');
+      const scrollY = window.pageYOffset;
+
+      sections.forEach(current => {
+        const sectionHeight = current.offsetHeight;
+        const sectionTop = current.offsetTop - 100;
+        const sectionId = current.getAttribute('id');
+        const navLink = document.querySelector(`.nav-menu-desktop a[href*="${sectionId}"]`);
+
+        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+          if (navLink) {
+            document.querySelectorAll('.nav-menu-desktop a').forEach(a => a.classList.remove('active'));
+            navLink.classList.add('active');
+          }
+        }
+      });
+    });
+
+    // 6. Light / Dark Theme Switcher with LocalStorage persistence
+    const themeToggleBtn = document.getElementById('theme-toggle-btn');
+    const metaThemeColor = document.getElementById('meta-theme-color');
+
+    function applyTheme(theme) {
+      if (theme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        if (metaThemeColor) metaThemeColor.setAttribute('content', '#040914');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+        if (metaThemeColor) metaThemeColor.setAttribute('content', '#f8fafc');
+      }
+      localStorage.setItem('medix-theme', theme);
+    }
+
+    // Initialize theme: Default to Light mode as requested
+    const savedTheme = localStorage.getItem('medix-theme') || 'light';
+    applyTheme(savedTheme);
+
+    if (themeToggleBtn) {
+      themeToggleBtn.addEventListener('click', () => {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        applyTheme(isDark ? 'light' : 'dark');
+      });
+    }
+  </script>
 </body>
 </html>
